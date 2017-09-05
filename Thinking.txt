@@ -1,0 +1,16 @@
+This document is meant to give insight into my thinking before starting on the problem.
+
+Helpfully, the challenge provides a number of features in the form of stories.
+
+Reading those features, I can see that the vending machine's interface is getting defined. 
+
+INPUT: coins, button presses, data on internal inventory, data on internal change-making abilities
+OUTPUT: coins, display, vended items
+
+Interestingly there is no requirement to allow paper bills or credit cards to be used for payment. 
+
+Organizing this project, I can see that there might be a need for supporting services, such as an inventory service to manage the actual inventory of the machine and ...what do I call it? A bank? I'm going to call it a bank, which manages the ability to provide change.
+
+I recall learning a long time ago (high school?) that the coins you put into the machine are not the same coins used to make change, so there would need to be a separate storage area for the bank's change and presumably a controller to let the main system know how much change was still available. The money used to pay for the snacks would go into a coin box as an input only. Perhaps a future feature would be to indicate that the machine can't be used because the coin box is full.
+
+There would need to be a way to keep the entered coins until either a successful selection is made or the coins are returned. Doing some research, there's some fun hardware that determines if a coins is a quarter, nickel, dime, or invalid (penny or fake), so the software will probably need to interface with that hardware through an API. 
