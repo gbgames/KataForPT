@@ -1,0 +1,2 @@
+ADD_SUBDIRECTORY (gmock-1.7.0)
+ADD_SUBDIRECTORY (projtests)
