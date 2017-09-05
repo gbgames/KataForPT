@@ -19,6 +19,7 @@
  */ 
 #include "CoinAccepter.h"
 #include "CoinCandidate.h"
+#include "CoinIdentifier.h"
 
 CoinAccepter::CoinAccepter() : m_currentAmount(0)
 {
@@ -35,5 +36,21 @@ Cents CoinAccepter::currentAmount() const
 
 void CoinAccepter::add(const CoinCandidate & candidate)
 {
-	m_currentAmount = 25;
+	switch (CoinIdentifier::identifyCoin(candidate.weight, candidate.diameter, candidate.thickness))
+	{
+		case QUARTER_COIN:
+			m_currentAmount += 25;
+			break;
+
+		case DIME_COIN:
+			m_currentAmount += 10;
+			break;
+
+		case NICKEL_COIN:
+			m_currentAmount += 5;
+			break;
+
+		default:
+			break;
+	}
 }

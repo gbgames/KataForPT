@@ -41,8 +41,16 @@ TEST_F(CoinAccepterFixture, ByDefaultHasNoCoins)
 
 TEST_F(CoinAccepterFixture, WhenAValidCoinIsAddedThenUpdateTheCurrentAmount)
 {
-	CoinCandidate candidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS);
-	accepter.add(candidate);
+	accepter.add(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS));
 
 	EXPECT_THAT(accepter.currentAmount(), Eq(25));
+}
+
+TEST_F(CoinAccepterFixture, WhenMultipleValidCoinsAreAddedThenUpdateTheCurrentAmountWithTheTotalValue)
+{
+	accepter.add(CoinCandidate(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS));
+	EXPECT_THAT(accepter.currentAmount(), Eq(10));
+
+	accepter.add(CoinCandidate(NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS));
+	EXPECT_THAT(accepter.currentAmount(), Eq(15));
 }
