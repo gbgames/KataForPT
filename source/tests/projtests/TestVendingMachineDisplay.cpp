@@ -19,12 +19,32 @@
  */ 
 
 #include "VendingMachineDisplay.h"
+#include "CoinAccepter.h"
 #include "gmock/gmock.h"
 
 using namespace testing;
 
 TEST(VendingMachineDisplayTest, ShowInsertCoinWhenThereAreNoCoinsInserted)
 {
-	VendingMachineDisplay display;
+	CoinAccepter accepter;
+	VendingMachineDisplay display(accepter);
 	EXPECT_THAT(display.ui(), StrEq("INSERT COIN"));
+}
+
+TEST(VendingMachineDisplayTest, ShowValueOfCoinsCurrentlyInserted)
+{
+	CoinAccepter accepter;
+	VendingMachineDisplay display(accepter);
+	accepter.add(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS));
+	EXPECT_THAT(display.ui(), StrEq("0.25"));
+	accepter.add(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS));
+	EXPECT_THAT(display.ui(), StrEq("0.50"));
+	accepter.add(CoinCandidate(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS));
+	EXPECT_THAT(display.ui(), StrEq("0.60"));
+	accepter.add(CoinCandidate(NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS));
+	EXPECT_THAT(display.ui(), StrEq("0.65"));
+	accepter.add(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS));
+	EXPECT_THAT(display.ui(), StrEq("0.90"));
+	accepter.add(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS));
+	EXPECT_THAT(display.ui(), StrEq("1.15"));
 }

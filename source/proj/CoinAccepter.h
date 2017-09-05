@@ -21,10 +21,9 @@
 #ifndef GB_COIN_ACCEPTER_H
 #define GB_COIN_ACCEPTER_H
 
+#include "Cents.h"
 #include "CoinCandidate.h"
 #include <vector>
-
-typedef int Cents;
 
 class CoinAccepter
 {

@@ -17,26 +17,9 @@
     You should have received a copy of the GNU General Public License
     along with KataForPT.  If not, see <http://www.gnu.org/licenses/>.
  */ 
-#ifndef GB_VENDING_MACHINE_DISPLAY_H
-#define GB_VENDING_MACHINE_DISPLAY_H
+#ifndef GB_CENTS_H
+#define GB_CENTS_H
 
-#include "Cents.h"
-#include <string>
-
-class CoinAccepter;
-
-class VendingMachineDisplay
-{
-	public:
-		VendingMachineDisplay(CoinAccepter & accepter);
-		~VendingMachineDisplay();
-
-		std::string ui() const;
-	
-	private:
-		std::string amountUI(Cents amount) const;
-		CoinAccepter & m_accepter;
-};
+typedef int Cents;
 
 #endif
-

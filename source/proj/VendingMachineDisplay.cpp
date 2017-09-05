@@ -19,8 +19,10 @@
  */ 
 
 #include "VendingMachineDisplay.h"
+#include "CoinAccepter.h"
+#include <sstream>
 
-VendingMachineDisplay::VendingMachineDisplay()
+VendingMachineDisplay::VendingMachineDisplay(CoinAccepter & accepter) : m_accepter(accepter)
 {
 }
 
@@ -30,5 +32,21 @@ VendingMachineDisplay::~VendingMachineDisplay()
 
 std::string VendingMachineDisplay::ui() const
 {
-	return "INSERT COIN";
+	Cents currentAmount = m_accepter.currentAmount();
+	if (0 == currentAmount)
+	{
+		return "INSERT COIN";
+	}
+	else
+	{
+		return amountUI(currentAmount);
+	}
+}
+
+std::string VendingMachineDisplay::amountUI(Cents amount) const
+{
+	std::stringstream amountText;
+	amountText << amount/100 << "." << amount % 100;
+
+	return amountText.str();
 }
