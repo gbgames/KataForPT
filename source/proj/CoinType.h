@@ -18,6 +18,9 @@
     along with KataForPT.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
+#ifndef GB_COIN_TYPE_H
+#define GB_COIN_TYPE_H
+
 enum CoinType
 {
 	QUARTER_COIN,
@@ -25,3 +28,5 @@ enum CoinType
 	NICKEL_COIN,
 	INVALID_COIN
 };
+
+#endif
