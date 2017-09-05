@@ -25,15 +25,22 @@
 
 using namespace testing;
 
-TEST(CoinAccepter, ByDefaultHasNoCoins)
+class CoinAccepterFixture : public Test
 {
+	public:
+		CoinAccepterFixture() {}
+		~CoinAccepterFixture() {}
+
 	CoinAccepter accepter;
+};
+
+TEST_F(CoinAccepterFixture, ByDefaultHasNoCoins)
+{
 	EXPECT_THAT(accepter.currentAmount(), Eq(0));
 }
 
-TEST(CoinAccepter, WhenAValidCoinIsAddedThenUpdateTheCurrentAmount)
+TEST_F(CoinAccepterFixture, WhenAValidCoinIsAddedThenUpdateTheCurrentAmount)
 {
-	CoinAccepter accepter;
 	CoinCandidate candidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS);
 	accepter.add(candidate);
 
