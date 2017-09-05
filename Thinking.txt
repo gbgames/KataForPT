@@ -47,3 +47,5 @@ Ultimately, my coin accepter should use the coin identifier to recognize the dif
 Now we're using the identifier, but the values are hardcoded. I can already see replacing my switch statement with a map, and providing constants for the Cents. And eventually I would like to be able to keep a collection of CoinTypes, but they aren't really needed until the story Return Coins. Until then, a running total works just fine.
 
 Interestingly enough, we're now adding the ability to give back a rejected coin, which means we need a place to put it. Currently we're rejecting a single coin at a time, but since I know I need to be able to provide multiple coins at a later time, I should use a collection of returned coins. YAGNI says I shouldn't, but in this case, I'll err on the side of "in software, you usually have none or many, never just one". 
+
+Ok, we have a coin accepter doing what it needs to do to satisfy the story. Now we need the vending machine to display different things based on what coins we have in the machine. To start with, we show the default text. 
