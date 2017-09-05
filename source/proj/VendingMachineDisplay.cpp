@@ -33,14 +33,8 @@ VendingMachineDisplay::~VendingMachineDisplay()
 std::string VendingMachineDisplay::ui() const
 {
 	Cents currentAmount = m_accepter.currentAmount();
-	if (0 == currentAmount)
-	{
-		return "INSERT COIN";
-	}
-	else
-	{
-		return amountUI(currentAmount);
-	}
+
+	return (0 == currentAmount) ? "INSERT COIN" : amountUI(currentAmount);
 }
 
 std::string VendingMachineDisplay::amountUI(Cents amount) const
