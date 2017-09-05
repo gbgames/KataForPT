@@ -49,3 +49,11 @@ TEST(CoinIdentifierTest, IdentifiesNickels)
 
 	EXPECT_THAT(CoinIdentifier::identifyCoin(NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS), Eq(NICKEL_COIN));
 }
+
+TEST(CoinIdentifierTest, IdentifiesInvalidCoins)
+{
+	const int ARBITRARY_WEIGHT(1234);
+	const int ARBITRARY_DIAMETER(5678);
+	const int ARBITRARY_THICKNESS(901);
+	EXPECT_THAT(CoinIdentifier::identifyCoin(ARBITRARY_WEIGHT, ARBITRARY_DIAMETER, ARBITRARY_THICKNESS), Eq(INVALID_COIN));
+}

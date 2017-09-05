@@ -64,6 +64,7 @@ CoinType CoinIdentifier::identifyCoin(int weight, int diameter, int thickness)
 	std::vector<Coin> coins;
 	coins.push_back(Coin(DIME_COIN, DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS));
 	coins.push_back(Coin(NICKEL_COIN, NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS));
+	coins.push_back(Coin(QUARTER_COIN, QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS));
 
 	for (std::vector<Coin>::iterator iter = coins.begin(); iter != coins.end(); ++iter)
 	{
@@ -73,5 +74,5 @@ CoinType CoinIdentifier::identifyCoin(int weight, int diameter, int thickness)
 		}
 	}
 
-	return QUARTER_COIN;
+	return INVALID_COIN;
 }
