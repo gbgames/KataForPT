@@ -28,7 +28,7 @@ struct Coin
 	{
 	}
 
-	bool isMatch(int w, int d, int t) const
+	bool isMatch(Weight w, Length d, Length t) const
 	{
 		return w == weight && d == diameter && t == thickness;
 	}
@@ -39,7 +39,7 @@ struct Coin
 	CoinThickness thickness;
 };
 
-CoinType CoinIdentifier::identifyCoin(int weight, int diameter, int thickness)
+CoinType CoinIdentifier::identifyCoin(Weight weight, Length diameter, Length thickness)
 {
 	std::vector<Coin> coins;
 	coins.push_back(Coin(DIME_COIN, DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS));

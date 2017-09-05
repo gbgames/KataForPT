@@ -20,6 +20,9 @@
 #ifndef GB_COIN_SPECIFICATIONS_H
 #define GB_COIN_SPECIFICATIONS_H
 
+typedef int Weight;
+typedef int Length;
+
 enum CoinWeight
 {
 	QUARTER_WEIGHT =  5670,

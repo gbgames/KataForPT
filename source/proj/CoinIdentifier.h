@@ -22,10 +22,11 @@
 #define GB_COIN_VALIDATOR_H
 
 #include "CoinType.h"
+#include "CoinSpecifications.h"
 
 namespace CoinIdentifier
 {
-	CoinType identifyCoin(int weight, int diameter, int thickness);
+	CoinType identifyCoin(Weight weight, Length diameter, Length thickness);
 };
 
 #endif

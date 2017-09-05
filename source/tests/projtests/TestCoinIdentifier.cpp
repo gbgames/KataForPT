@@ -19,41 +19,30 @@
  */
 
 #include "CoinIdentifier.h"
+#include "CoinSpecifications.h"
 #include "gmock/gmock.h"
 
 using namespace testing;
 
 TEST(CoinIdentifierTest, IdentifiesQuarters)
 {
-	const int QUARTER_WEIGHT(5670);
-	const int QUARTER_DIAMETER(2426);
-	const int QUARTER_THICKNESS(175);
-
 	EXPECT_THAT(CoinIdentifier::identifyCoin(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS), Eq(QUARTER_COIN));
 }
 
 TEST(CoinIdentifierTest, IdentifiesDimes)
 {
-	const int DIME_WEIGHT(2268);
-	const int DIME_DIAMETER(1791);
-	const int DIME_THICKNESS(135);
-
 	EXPECT_THAT(CoinIdentifier::identifyCoin(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS), Eq(DIME_COIN));
 }
 
 TEST(CoinIdentifierTest, IdentifiesNickels)
 {
-	const int NICKEL_WEIGHT(5000);
-	const int NICKEL_DIAMETER(2121);
-	const int NICKEL_THICKNESS(195);
-
 	EXPECT_THAT(CoinIdentifier::identifyCoin(NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS), Eq(NICKEL_COIN));
 }
 
 TEST(CoinIdentifierTest, IdentifiesInvalidCoins)
 {
-	const int ARBITRARY_WEIGHT(1234);
-	const int ARBITRARY_DIAMETER(5678);
-	const int ARBITRARY_THICKNESS(901);
+	const Weight ARBITRARY_WEIGHT(1234);
+	const Length ARBITRARY_DIAMETER(5678);
+	const Length ARBITRARY_THICKNESS(901);
 	EXPECT_THAT(CoinIdentifier::identifyCoin(ARBITRARY_WEIGHT, ARBITRARY_DIAMETER, ARBITRARY_THICKNESS), Eq(INVALID_COIN));
 }

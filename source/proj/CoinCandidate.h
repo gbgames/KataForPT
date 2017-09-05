@@ -21,13 +21,15 @@
 #ifndef GB_COIN_CANDIDATE_H
 #define GB_COIN_CANDIDATE_H
 
+#include "CoinSpecifications.h"
+
 struct CoinCandidate
 {
-	CoinCandidate(int weight_, int diameter_, int thickness_) : weight(weight_), diameter(diameter_), thickness(thickness_) {}
+	CoinCandidate(Weight weight_, Length diameter_, Length thickness_) : weight(weight_), diameter(diameter_), thickness(thickness_) {}
 
-	int weight;
-	int diameter;
-	int thickness;
+	Weight weight;
+	Length diameter;
+	Length thickness;
 };
 
 #endif
