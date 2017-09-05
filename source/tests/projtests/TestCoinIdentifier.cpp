@@ -31,3 +31,12 @@ TEST(CoinIdentifierTest, IdentifiesQuarters)
 
 	EXPECT_THAT(CoinIdentifier::identifyCoin(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS), Eq(QUARTER_COIN));
 }
+
+TEST(CoinIdentifierTest, IdentifiesDimes)
+{
+	const int DIME_WEIGHT(2268);
+	const int DIME_DIAMETER(1791);
+	const int DIME_THICKNESS(135);
+
+	EXPECT_THAT(CoinIdentifier::identifyCoin(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS), Eq(DIME_COIN));
+}

@@ -19,7 +19,30 @@
  */ 
 #include "CoinIdentifier.h"
 
-CoinType CoinIdentifier::identifyCoin(int weight, int size, int thickness)
+enum CoinWeight
 {
+	QUARTER_WEIGHT =  5670,
+	DIME_WEIGHT = 2268
+};
+
+enum CoinDiameter
+{
+	QUARTER_DIAMETER = 2426,
+	DIME_DIAMETER = 1791
+};
+
+enum CoinThickness
+{
+	QUARTER_THICKNESS = 175,
+	DIME_THICKNESS = 135
+};
+
+CoinType CoinIdentifier::identifyCoin(int weight, int diameter, int thickness)
+{
+	if (DIME_WEIGHT == weight && DIME_DIAMETER == diameter && DIME_THICKNESS == thickness)
+	{
+		return DIME_COIN;
+	}
+
 	return QUARTER_COIN;
 }
