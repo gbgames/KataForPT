@@ -17,23 +17,28 @@
     You should have received a copy of the GNU General Public License
     along with KataForPT.  If not, see <http://www.gnu.org/licenses/>.
  */ 
-#include "CoinAccepter.h"
-#include "CoinCandidate.h"
+#ifndef GB_COIN_SPECIFICATIONS_H
+#define GB_COIN_SPECIFICATIONS_H
 
-CoinAccepter::CoinAccepter() : m_currentAmount(0)
+enum CoinWeight
 {
-}
+	QUARTER_WEIGHT =  5670,
+	DIME_WEIGHT = 2268,
+	NICKEL_WEIGHT = 5000
+};
 
-CoinAccepter::~CoinAccepter()
+enum CoinDiameter
 {
-}
+	QUARTER_DIAMETER = 2426,
+	DIME_DIAMETER = 1791,
+	NICKEL_DIAMETER = 2121
+};
 
-Cents CoinAccepter::currentAmount() const
+enum CoinThickness
 {
-	return m_currentAmount;
-}
+	QUARTER_THICKNESS = 175,
+	DIME_THICKNESS = 135,
+	NICKEL_THICKNESS = 195
+};
 
-void CoinAccepter::add(const CoinCandidate & candidate)
-{
-	m_currentAmount = 25;
-}
+#endif

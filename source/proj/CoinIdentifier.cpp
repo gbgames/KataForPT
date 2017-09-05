@@ -18,28 +18,8 @@
     along with KataForPT.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 #include "CoinIdentifier.h"
+#include "CoinSpecifications.h"
 #include <vector>
-
-enum CoinWeight
-{
-	QUARTER_WEIGHT =  5670,
-	DIME_WEIGHT = 2268,
-	NICKEL_WEIGHT = 5000
-};
-
-enum CoinDiameter
-{
-	QUARTER_DIAMETER = 2426,
-	DIME_DIAMETER = 1791,
-	NICKEL_DIAMETER = 2121
-};
-
-enum CoinThickness
-{
-	QUARTER_THICKNESS = 175,
-	DIME_THICKNESS = 135,
-	NICKEL_THICKNESS = 195
-};
 
 struct Coin
 {

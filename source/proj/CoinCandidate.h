@@ -17,23 +17,18 @@
     You should have received a copy of the GNU General Public License
     along with KataForPT.  If not, see <http://www.gnu.org/licenses/>.
  */ 
-#include "CoinAccepter.h"
-#include "CoinCandidate.h"
 
-CoinAccepter::CoinAccepter() : m_currentAmount(0)
-{
-}
+#ifndef GB_COIN_CANDIDATE_H
+#define GB_COIN_CANDIDATE_H
 
-CoinAccepter::~CoinAccepter()
+struct CoinCandidate
 {
-}
+	CoinCandidate(int weight_, int diameter_, int thickness_) : weight(weight_), diameter(diameter_), thickness(thickness_) {}
 
-Cents CoinAccepter::currentAmount() const
-{
-	return m_currentAmount;
-}
+	int weight;
+	int diameter;
+	int thickness;
+};
 
-void CoinAccepter::add(const CoinCandidate & candidate)
-{
-	m_currentAmount = 25;
-}
+#endif
+

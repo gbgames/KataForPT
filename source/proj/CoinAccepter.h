@@ -21,14 +21,22 @@
 #ifndef GB_COIN_ACCEPTER_H
 #define GB_COIN_ACCEPTER_H
 
+typedef int Cents;
+
+class CoinCandidate;
+
 class CoinAccepter
 {
 	public:
 		CoinAccepter();
 		~CoinAccepter();
 	
-		int currentAmount() const;
+		Cents currentAmount() const;
+		void add(const CoinCandidate & candidate);
 
+	private:
+		int m_currentAmount;
+		
 };
 
 #endif

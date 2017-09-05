@@ -19,6 +19,8 @@
  */
 
 #include "CoinAccepter.h"
+#include "CoinCandidate.h"
+#include "CoinSpecifications.h"
 #include "gmock/gmock.h"
 
 using namespace testing;
@@ -27,4 +29,13 @@ TEST(CoinAccepter, ByDefaultHasNoCoins)
 {
 	CoinAccepter accepter;
 	EXPECT_THAT(accepter.currentAmount(), Eq(0));
+}
+
+TEST(CoinAccepter, WhenAValidCoinIsAddedThenUpdateTheCurrentAmount)
+{
+	CoinAccepter accepter;
+	CoinCandidate candidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS);
+	accepter.add(candidate);
+
+	EXPECT_THAT(accepter.currentAmount(), Eq(25));
 }
