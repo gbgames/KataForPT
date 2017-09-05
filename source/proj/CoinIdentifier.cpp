@@ -40,11 +40,30 @@ enum CoinThickness
 	NICKEL_THICKNESS = 195
 };
 
+struct Coin
+{
+	Coin(CoinType type_, CoinWeight weight_, CoinDiameter diameter_, CoinThickness thickness_) : 
+		type(type_), weight(weight_), diameter(diameter_), thickness(thickness_)
+	{
+	}
+
+	bool isCoin(int w, int d, int t) const
+	{
+		return w == weight && d == diameter && t == thickness;
+	}
+
+	CoinType type;
+	CoinWeight weight;
+	CoinDiameter diameter;
+	CoinThickness thickness;
+};
+
 CoinType CoinIdentifier::identifyCoin(int weight, int diameter, int thickness)
 {
-	if (DIME_WEIGHT == weight && DIME_DIAMETER == diameter && DIME_THICKNESS == thickness)
+	Coin dime(DIME_COIN, DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS);
+	if (dime.isCoin(weight, diameter, thickness))
 	{
-		return DIME_COIN;
+		return dime.type;
 	}
 	else if (NICKEL_WEIGHT == weight && NICKEL_DIAMETER == diameter && NICKEL_THICKNESS == thickness)
 	{
