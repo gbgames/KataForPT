@@ -51,6 +51,12 @@ void CoinAccepter::add(const CoinCandidate & candidate)
 			break;
 
 		default:
+			m_returnedCoins.push_back(candidate);
 			break;
 	}
+}
+
+std::vector<CoinCandidate> CoinAccepter::returnedCoins() const
+{
+	return m_returnedCoins;
 }

@@ -54,3 +54,15 @@ TEST_F(CoinAccepterFixture, WhenMultipleValidCoinsAreAddedThenUpdateTheCurrentAm
 	accepter.add(CoinCandidate(NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS));
 	EXPECT_THAT(accepter.currentAmount(), Eq(15));
 }
+
+TEST_F(CoinAccepterFixture, WhenAnInvalidCoinIsAddedThenDoNotAcceptIt)
+{
+	ASSERT_TRUE(accepter.returnedCoins().empty());
+	const Weight ARBITRARY_WEIGHT(2500);
+	const Length ARBITRARY_DIAMETER(1905);
+	const Length ARBITRARY_THICKNESS(152);
+	CoinCandidate candidate(ARBITRARY_WEIGHT, ARBITRARY_DIAMETER, ARBITRARY_THICKNESS);
+	accepter.add(candidate);
+
+	EXPECT_THAT(accepter.returnedCoins().at(0), Eq(candidate));
+}

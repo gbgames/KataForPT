@@ -27,6 +27,13 @@ struct CoinCandidate
 {
 	CoinCandidate(Weight weight_, Length diameter_, Length thickness_) : weight(weight_), diameter(diameter_), thickness(thickness_) {}
 
+	bool operator==(const CoinCandidate& other) const
+	{
+		return (this->weight == other.weight &&
+				this->diameter == other.diameter &&
+				this->thickness == other.thickness);
+	}
+
 	Weight weight;
 	Length diameter;
 	Length thickness;

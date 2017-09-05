@@ -21,9 +21,10 @@
 #ifndef GB_COIN_ACCEPTER_H
 #define GB_COIN_ACCEPTER_H
 
-typedef int Cents;
+#include "CoinCandidate.h"
+#include <vector>
 
-class CoinCandidate;
+typedef int Cents;
 
 class CoinAccepter
 {
@@ -33,10 +34,11 @@ class CoinAccepter
 	
 		Cents currentAmount() const;
 		void add(const CoinCandidate & candidate);
+		std::vector<CoinCandidate> returnedCoins() const;
 
 	private:
 		int m_currentAmount;
-		
+		std::vector<CoinCandidate> m_returnedCoins;
 };
 
 #endif
