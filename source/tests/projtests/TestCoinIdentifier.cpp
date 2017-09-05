@@ -40,3 +40,12 @@ TEST(CoinIdentifierTest, IdentifiesDimes)
 
 	EXPECT_THAT(CoinIdentifier::identifyCoin(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS), Eq(DIME_COIN));
 }
+
+TEST(CoinIdentifierTest, IdentifiesNickels)
+{
+	const int NICKEL_WEIGHT(5000);
+	const int NICKEL_DIAMETER(2121);
+	const int NICKEL_THICKNESS(195);
+
+	EXPECT_THAT(CoinIdentifier::identifyCoin(NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS), Eq(NICKEL_COIN));
+}

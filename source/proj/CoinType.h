@@ -21,5 +21,6 @@
 enum CoinType
 {
 	QUARTER_COIN,
-	DIME_COIN
+	DIME_COIN,
+	NICKEL_COIN
 };
