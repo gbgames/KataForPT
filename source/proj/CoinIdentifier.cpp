@@ -18,6 +18,7 @@
     along with KataForPT.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 #include "CoinIdentifier.h"
+#include <vector>
 
 enum CoinWeight
 {
@@ -47,7 +48,7 @@ struct Coin
 	{
 	}
 
-	bool isCoin(int w, int d, int t) const
+	bool isMatch(int w, int d, int t) const
 	{
 		return w == weight && d == diameter && t == thickness;
 	}
@@ -60,14 +61,16 @@ struct Coin
 
 CoinType CoinIdentifier::identifyCoin(int weight, int diameter, int thickness)
 {
-	Coin dime(DIME_COIN, DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS);
-	if (dime.isCoin(weight, diameter, thickness))
+	std::vector<Coin> coins;
+	coins.push_back(Coin(DIME_COIN, DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS));
+	coins.push_back(Coin(NICKEL_COIN, NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS));
+
+	for (std::vector<Coin>::iterator iter = coins.begin(); iter != coins.end(); ++iter)
 	{
-		return dime.type;
-	}
-	else if (NICKEL_WEIGHT == weight && NICKEL_DIAMETER == diameter && NICKEL_THICKNESS == thickness)
-	{
-		return NICKEL_COIN;
+		if (iter->isMatch(weight, diameter, thickness))
+		{
+			return iter->type;
+		}
 	}
 
 	return QUARTER_COIN;
