@@ -56,5 +56,9 @@ void VendingMachineApp::process(char choice)
 		case 'n':
 			m_accepter.add(CoinCandidate(NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS));
 			break;
+
+		case 'p':
+			m_accepter.add(CoinCandidate(2500, 1905, 152));
+			break;
 	}
 }
