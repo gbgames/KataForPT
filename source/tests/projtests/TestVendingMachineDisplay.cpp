@@ -69,3 +69,9 @@ TEST_F(VendingMachineDisplayFixture, ShowValueOfCoinsCurrentlyInserted)
 	insertQuarter();
 	EXPECT_THAT(display.ui(), StrEq("1.15"));
 }
+
+TEST_F(VendingMachineDisplayFixture, ShowValueOfCoinsLessThanTenCents)
+{
+	insertNickel();
+	EXPECT_THAT(display.ui(), StrEq("0.05"));
+}

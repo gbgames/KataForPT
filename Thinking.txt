@@ -61,3 +61,7 @@ I'd like to be able to actually interact with this program, so let's create an A
 Technically I added VendingMachineApp.h/.cpp when I initially wrote the lines in the test that needed them, but I didn't want to make such tiny commits to illustrate it.
 
 Ah, ha! I've uncovered a defect! Apparently when I have only 5 cents on the machine, it outputs as 50 cents instead. My test for the app is failing because I had a test gap in my display code.
+
+Ok, now we have a test that reproduces the defect. Now to fix it.
+
+Note, I could have commented out the failing app test, but I decided not to as it wasn't adding much noise, and I think it would be satisfying to have both tests pass with the same fix.
