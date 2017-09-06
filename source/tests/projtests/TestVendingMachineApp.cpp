@@ -86,3 +86,19 @@ TEST_F(VendingMachineAppFixture, WhenUserEntersNThenAppInsertsANickel)
 	std::string nickelAmount(getNextOutputLine());
 	EXPECT_THAT(nickelAmount, StrEq("0.05"));
 }
+
+TEST_F(VendingMachineAppFixture, WhenUserEntersPThenAppInsertsAPenny)
+{
+	std::stringstream input;
+	input << 'p' << std::endl;
+
+	app.run(input);
+
+	std::string defaultLine(getNextOutputLine());
+	EXPECT_THAT(defaultLine, StrEq("INSERT COIN"));
+
+	std::string noPennyLine(getNextOutputLine());
+	EXPECT_THAT(noPennyLine, StrEq("INSERT COIN"));
+
+	EXPECT_THAT(accepter.returnedCoins().size(), Eq(1));
+}
