@@ -72,3 +72,17 @@ TEST_F(VendingMachineAppFixture, WhenUserEntersDThenAppInsertsADime)
 	std::string dimeAmount(getNextOutputLine());
 	EXPECT_THAT(dimeAmount, StrEq("0.10"));
 }
+
+TEST_F(VendingMachineAppFixture, WhenUserEntersNThenAppInsertsANickel)
+{
+	std::stringstream input;
+	input << 'n' << std::endl;
+
+	app.run(input);
+
+	std::string defaultLine(getNextOutputLine());
+	EXPECT_THAT(defaultLine, StrEq("INSERT COIN"));
+
+	std::string nickelAmount(getNextOutputLine());
+	EXPECT_THAT(nickelAmount, StrEq("0.05"));
+}
