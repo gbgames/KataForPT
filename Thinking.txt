@@ -65,3 +65,28 @@ Ah, ha! I've uncovered a defect! Apparently when I have only 5 cents on the mach
 Ok, now we have a test that reproduces the defect. Now to fix it.
 
 Note, I could have commented out the failing app test, but I decided not to as it wasn't adding much noise, and I think it would be satisfying to have both tests pass with the same fix.
+
+Now to run the demo:
+
+$ ./KataForPT-bin 
+INSERT COIN
+q
+0.25
+q
+0.50
+d
+0.60
+n
+0.65
+p
+0.65
+p
+0.65
+p
+0.65
+r
+Returned: rejected coin, rejected coin, rejected coin
+d
+0.75
+
+Works great!
