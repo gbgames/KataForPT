@@ -25,13 +25,20 @@
 
 using namespace testing;
 
-TEST(VendingMachineApp, WhenUserEntersQThenAppInsertsAQuarter)
+class VendingMachineAppFixture : public Test
 {
+	public:
+		VendingMachineAppFixture() : display(accepter), app(output, accepter, display) {}
+		~VendingMachineAppFixture() {}
+
 	std::stringstream output;
 	CoinAccepter accepter;
-	VendingMachineDisplay display(accepter);
-	VendingMachineApp app(output, accepter, display);
+	VendingMachineDisplay display;
+	VendingMachineApp app;
+};
 
+TEST_F(VendingMachineAppFixture, WhenUserEntersQThenAppInsertsAQuarter)
+{
 	std::stringstream input;
 	input << 'q' << std::endl;
 
@@ -46,13 +53,8 @@ TEST(VendingMachineApp, WhenUserEntersQThenAppInsertsAQuarter)
 	EXPECT_THAT(quarterAmount, StrEq("0.25"));
 }
 
-TEST(VendingMachineApp, WhenUserEntersDThenAppInsertsADime)
+TEST_F(VendingMachineAppFixture, WhenUserEntersDThenAppInsertsADime)
 {
-	std::stringstream output;
-	CoinAccepter accepter;
-	VendingMachineDisplay display(accepter);
-	VendingMachineApp app(output, accepter, display);
-
 	std::stringstream input;
 	input << 'd' << std::endl;
 
