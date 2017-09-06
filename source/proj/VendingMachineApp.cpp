@@ -43,8 +43,14 @@ void VendingMachineApp::run(std::istream & input)
 
 void VendingMachineApp::process(char choice)
 {
-	if ('q' == choice)
+	switch (choice)
 	{
-		m_accepter.add(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS));
+		case 'q':
+			m_accepter.add(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS));
+			break;
+
+		case 'd':
+			m_accepter.add(CoinCandidate(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS));
+			break;
 	}
 }
