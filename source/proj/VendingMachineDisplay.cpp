@@ -20,6 +20,7 @@
 
 #include "VendingMachineDisplay.h"
 #include "CoinAccepter.h"
+#include <iomanip>
 #include <sstream>
 
 VendingMachineDisplay::VendingMachineDisplay(CoinAccepter & accepter) : m_accepter(accepter)
@@ -40,7 +41,7 @@ std::string VendingMachineDisplay::ui() const
 std::string VendingMachineDisplay::amountUI(Cents amount) const
 {
 	std::stringstream amountText;
-	amountText << amount/100 << "." << amount % 100;
+	amountText << amount/100 << "." << std::setw(2) << std::setfill('0') << amount % 100;
 
 	return amountText.str();
 }
