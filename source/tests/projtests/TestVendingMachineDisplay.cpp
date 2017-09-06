@@ -24,27 +24,48 @@
 
 using namespace testing;
 
-TEST(VendingMachineDisplayTest, ShowInsertCoinWhenThereAreNoCoinsInserted)
+class VendingMachineDisplayFixture : public Test
 {
-	CoinAccepter accepter;
-	VendingMachineDisplay display(accepter);
+	public:
+		VendingMachineDisplayFixture() : display(accepter) {}
+		~VendingMachineDisplayFixture() {}
+
+		void insertQuarter()
+		{
+			accepter.add(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS));
+		}
+
+		void insertDime()
+		{
+			accepter.add(CoinCandidate(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS));
+		}
+
+		void insertNickel()
+		{
+			accepter.add(CoinCandidate(NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS));
+		}
+
+		CoinAccepter accepter;
+		VendingMachineDisplay display;
+};
+
+TEST_F(VendingMachineDisplayFixture, ShowInsertCoinWhenThereAreNoCoinsInserted)
+{
 	EXPECT_THAT(display.ui(), StrEq("INSERT COIN"));
 }
 
-TEST(VendingMachineDisplayTest, ShowValueOfCoinsCurrentlyInserted)
+TEST_F(VendingMachineDisplayFixture, ShowValueOfCoinsCurrentlyInserted)
 {
-	CoinAccepter accepter;
-	VendingMachineDisplay display(accepter);
-	accepter.add(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS));
+	insertQuarter();
 	EXPECT_THAT(display.ui(), StrEq("0.25"));
-	accepter.add(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS));
+	insertQuarter();
 	EXPECT_THAT(display.ui(), StrEq("0.50"));
-	accepter.add(CoinCandidate(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS));
+	insertDime();
 	EXPECT_THAT(display.ui(), StrEq("0.60"));
-	accepter.add(CoinCandidate(NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS));
+	insertNickel();
 	EXPECT_THAT(display.ui(), StrEq("0.65"));
-	accepter.add(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS));
+	insertQuarter();
 	EXPECT_THAT(display.ui(), StrEq("0.90"));
-	accepter.add(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS));
+	insertQuarter();
 	EXPECT_THAT(display.ui(), StrEq("1.15"));
 }
