@@ -57,3 +57,5 @@ I like the symmetry of returning the default text or returning a calculated resu
 I realize that this test might need to change to accomodate the Exact Change Only story later, but as I don't have a way to query if I have enough money to make change, I'll worry about it later.
 
 I'd like to be able to actually interact with this program, so let's create an App to manage input. It would make for a good demo for the implemented feature.
+
+Technically I added VendingMachineApp.h/.cpp when I initially wrote the lines in the test that needed them, but I didn't want to make such tiny commits to illustrate it.
