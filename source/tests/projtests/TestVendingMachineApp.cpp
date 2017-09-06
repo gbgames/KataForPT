@@ -102,3 +102,22 @@ TEST_F(VendingMachineAppFixture, WhenUserEntersPThenAppInsertsAPenny)
 
 	EXPECT_THAT(accepter.returnedCoins().size(), Eq(1));
 }
+
+TEST_F(VendingMachineAppFixture, WhenUserEntersRThenAppDisplaysReturnedCoins)
+{
+	std::stringstream input;
+	input << 'p' << std::endl;
+	input << 'p' << std::endl;
+	input << 'p' << std::endl;
+	input << 'r' << std::endl;
+
+	app.run(input);
+
+	EXPECT_THAT(getNextOutputLine(), StrEq("INSERT COIN"));
+	EXPECT_THAT(getNextOutputLine(), StrEq("INSERT COIN"));
+	EXPECT_THAT(getNextOutputLine(), StrEq("INSERT COIN"));
+	EXPECT_THAT(getNextOutputLine(), StrEq("INSERT COIN"));
+
+	std::string noPennyLine(getNextOutputLine());
+	EXPECT_THAT(noPennyLine, StrEq("Returned: rejected coin, rejected coin, rejected coin"));
+}
