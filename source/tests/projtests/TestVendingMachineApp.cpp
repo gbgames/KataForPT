@@ -30,6 +30,14 @@ class VendingMachineAppFixture : public Test
 	public:
 		VendingMachineAppFixture() : display(accepter), app(output, accepter, display) {}
 		~VendingMachineAppFixture() {}
+	
+		std::string getNextOutputLine()
+		{
+			std::string line;
+			std::getline(output, line);
+
+			return line;
+		}
 
 	std::stringstream output;
 	CoinAccepter accepter;
@@ -44,12 +52,10 @@ TEST_F(VendingMachineAppFixture, WhenUserEntersQThenAppInsertsAQuarter)
 
 	app.run(input);
 
-	std::string defaultLine;
-	std::getline(output, defaultLine);
+	std::string defaultLine(getNextOutputLine());
 	EXPECT_THAT(defaultLine, StrEq("INSERT COIN"));
 
-	std::string quarterAmount;
-	std::getline(output, quarterAmount);
+	std::string quarterAmount(getNextOutputLine());
 	EXPECT_THAT(quarterAmount, StrEq("0.25"));
 }
 
@@ -60,11 +66,9 @@ TEST_F(VendingMachineAppFixture, WhenUserEntersDThenAppInsertsADime)
 
 	app.run(input);
 
-	std::string defaultLine;
-	std::getline(output, defaultLine);
+	std::string defaultLine(getNextOutputLine());
 	EXPECT_THAT(defaultLine, StrEq("INSERT COIN"));
 
-	std::string quarterAmount;
-	std::getline(output, quarterAmount);
-	EXPECT_THAT(quarterAmount, StrEq("0.10"));
+	std::string dimeAmount(getNextOutputLine());
+	EXPECT_THAT(dimeAmount, StrEq("0.10"));
 }
