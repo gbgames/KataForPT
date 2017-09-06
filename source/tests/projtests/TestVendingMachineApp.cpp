@@ -45,3 +45,24 @@ TEST(VendingMachineApp, WhenUserEntersQThenAppInsertsAQuarter)
 	std::getline(output, quarterAmount);
 	EXPECT_THAT(quarterAmount, StrEq("0.25"));
 }
+
+TEST(VendingMachineApp, WhenUserEntersDThenAppInsertsADime)
+{
+	std::stringstream output;
+	CoinAccepter accepter;
+	VendingMachineDisplay display(accepter);
+	VendingMachineApp app(output, accepter, display);
+
+	std::stringstream input;
+	input << 'd' << std::endl;
+
+	app.run(input);
+
+	std::string defaultLine;
+	std::getline(output, defaultLine);
+	EXPECT_THAT(defaultLine, StrEq("INSERT COIN"));
+
+	std::string quarterAmount;
+	std::getline(output, quarterAmount);
+	EXPECT_THAT(quarterAmount, StrEq("0.10"));
+}
