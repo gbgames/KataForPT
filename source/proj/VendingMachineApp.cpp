@@ -22,8 +22,9 @@
 #include "CoinCandidate.h"
 #include "CoinAccepter.h"
 #include "VendingMachineDisplay.h"
+#include <sstream>
 
-VendingMachineApp::VendingMachineApp(std::ostream & output, CoinAccepter & accepter, VendingMachineDisplay & display) : m_output(output), m_accepter(accepter), m_display(display)
+VendingMachineApp::VendingMachineApp(std::ostream & output, CoinAccepter & accepter, VendingMachineDisplay & display) : m_output(output), m_accepter(accepter), m_display(display), m_showReturnedCoins(false)
 {
 }
 
@@ -37,7 +38,15 @@ void VendingMachineApp::run(std::istream & input)
 	do 
 	{
 		process(choice);
-		m_output << m_display.ui() << std::endl;
+		if (m_showReturnedCoins)
+		{
+			m_output << outputReturnedCoins() << std::endl;
+			m_showReturnedCoins = false;
+		}
+		else
+		{
+			m_output << m_display.ui() << std::endl;
+		}
 	} while (input >> choice);
 }
 
@@ -60,5 +69,24 @@ void VendingMachineApp::process(char choice)
 		case 'p':
 			m_accepter.add(CoinCandidate(2500, 1905, 152));
 			break;
+
+		case 'r':
+			m_showReturnedCoins = true;
 	}
+}
+
+std::string VendingMachineApp::outputReturnedCoins()
+{
+	std::stringstream coinText;
+	coinText << "Returned: ";
+	for (int i = 0; i < m_accepter.returnedCoins().size(); ++i)
+	{
+		coinText << "rejected coin";
+		if (i + 1 < m_accepter.returnedCoins().size())
+		{
+			coinText << ", ";
+		}
+	}
+
+	return coinText.str();
 }

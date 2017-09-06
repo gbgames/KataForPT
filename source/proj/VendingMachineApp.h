@@ -35,9 +35,11 @@ class VendingMachineApp
 
 	private:
 		void process(char choice);
+		std::string outputReturnedCoins();
 		std::ostream & m_output;
 		CoinAccepter & m_accepter;
 		VendingMachineDisplay & m_display;
+		bool m_showReturnedCoins;
 };
 
 #endif
