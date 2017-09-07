@@ -90,3 +90,6 @@ d
 0.75
 
 Works great!
+
+I want to take a moment to think about how I could have done better. I allowed a test gap because I didn't recognize that there could be an issue with how the text is displayed. Instead of testing the individual results of putting in a single coin, I tried to allow a single test to handle a bigger responsibility of showing the amount totalling up as well as assume that each coin was showing correctly. I'm not going to beat myself up about it, but it is something that will give me pause the next time I find myself wanting to get by with fewer tests.
+
