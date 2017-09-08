@@ -27,3 +27,7 @@ ProductSelectionService::ProductSelectionService()
 ProductSelectionService::~ProductSelectionService()
 {
 }
+
+void ProductSelectionService::select(VendingProduct product)
+{
+}

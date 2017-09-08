@@ -20,11 +20,18 @@
 #ifndef GB_PRODUCT_SELECTION_SERVICE_H
 #define GB_PRODUCT_SELECTION_SERVICE_H
 
+enum VendingProduct
+{
+	COLA_PRODUCT
+};
+
 class ProductSelectionService
 {
 	public:
 		ProductSelectionService();
 		~ProductSelectionService();
+
+		void select(VendingProduct product);
 };
 
 #endif
