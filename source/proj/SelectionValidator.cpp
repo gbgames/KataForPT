@@ -28,6 +28,7 @@ SelectionValidator::~SelectionValidator()
 {
 }
 
-void SelectionValidator::select(VendingProduct product)
+SelectionResponse SelectionValidator::select(VendingProduct product)
 {
+	return NOT_ENOUGH_MONEY_RESPONSE;
 }

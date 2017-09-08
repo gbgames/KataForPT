@@ -22,13 +22,18 @@
 
 #include "VendingProduct.h"
 
+enum SelectionResponse
+{
+	NOT_ENOUGH_MONEY_RESPONSE
+};
+
 class SelectionValidator
 {
 	public:
 		SelectionValidator();
 		~SelectionValidator();
 
-		void select(VendingProduct product);
+		SelectionResponse select(VendingProduct product);
 };
 
 #endif
