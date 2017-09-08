@@ -117,3 +117,5 @@ Now that we have a simple selection service, we need to create something that va
 Now, obviously the selection validator has no idea what the status of the money is. That's where the coin accepter would come in, and we'll add it in the next test and so then need to inject it into the validator. And since we'll be passing through the selection to the selection service, we'll inject it as well. It's kind of a bigger jump to write this test, but I'm feeling confident. 
 
 I also notice that adding a coin candidate happens often enough that I want to extract the helpers I created in VendingMachineDisplayFixture so more tests can use them.
+
+Oh, yeah. There is no current functionality to reset the coin accepter. We'll need to change that, as this story asks that we need to be able to have the display say INSERT COIN again with the current amount reset to $0.00.

@@ -19,8 +19,10 @@
  */ 
 
 #include "SelectionValidator.h"
+#include "CoinAccepter.h"
+#include "ProductSelectionService.h"
 
-SelectionValidator::SelectionValidator(CoinAccepter & accepter, ProductSelectionService & service)
+SelectionValidator::SelectionValidator(CoinAccepter & accepter, ProductSelectionService & service) : m_accepter(accepter), m_service(service)
 {
 }
 
@@ -30,5 +32,10 @@ SelectionValidator::~SelectionValidator()
 
 SelectionResponse SelectionValidator::select(VendingProduct product)
 {
+	if (100 == m_accepter.currentAmount())
+	{
+		m_service.select(product);
+		return PRODUCT_DISPENSED;
+	}
 	return NOT_ENOUGH_MONEY_RESPONSE;
 }

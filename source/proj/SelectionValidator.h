@@ -38,6 +38,11 @@ class SelectionValidator
 		~SelectionValidator();
 
 		SelectionResponse select(VendingProduct product);
+
+	private:
+		CoinAccepter & m_accepter;
+		ProductSelectionService & m_service;
+
 };
 
 #endif
