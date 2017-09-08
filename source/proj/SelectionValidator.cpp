@@ -26,6 +26,7 @@ SelectionValidator::SelectionValidator(CoinAccepter & accepter, ProductSelection
 {
 	m_productToPriceMap.insert(std::make_pair(COLA_PRODUCT, 100));
 	m_productToPriceMap.insert(std::make_pair(CHIPS_PRODUCT, 50));
+	m_productToPriceMap.insert(std::make_pair(CANDY_PRODUCT, 65));
 }
 
 SelectionValidator::~SelectionValidator()
