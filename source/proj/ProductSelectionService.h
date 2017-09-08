@@ -24,7 +24,8 @@ enum VendingProduct
 {
 	NO_PRODUCT,
 	COLA_PRODUCT,
-	CHIPS_PRODUCT
+	CHIPS_PRODUCT,
+	CANDY_PRODUCT
 };
 
 class ProductSelectionService
