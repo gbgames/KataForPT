@@ -26,5 +26,6 @@ using namespace testing;
 TEST(ProductSelectionServiceTest, WhenColaSelectedThenDispenseCola)
 {
 	ProductSelectionService service;
+	service.select(COLA_PRODUCT);
 
 }
