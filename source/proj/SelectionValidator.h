@@ -24,13 +24,17 @@
 
 enum SelectionResponse
 {
-	NOT_ENOUGH_MONEY_RESPONSE
+	NOT_ENOUGH_MONEY_RESPONSE,
+	PRODUCT_DISPENSED
 };
+
+class CoinAccepter;
+class ProductSelectionService;
 
 class SelectionValidator
 {
 	public:
-		SelectionValidator();
+		SelectionValidator(CoinAccepter & accepter, ProductSelectionService & service);
 		~SelectionValidator();
 
 		SelectionResponse select(VendingProduct product);
