@@ -34,6 +34,7 @@ SelectionResponse SelectionValidator::select(VendingProduct product)
 {
 	if (100 == m_accepter.currentAmount())
 	{
+		m_accepter.purchaseWith(100);
 		m_service.select(product);
 		return PRODUCT_DISPENSED;
 	}
