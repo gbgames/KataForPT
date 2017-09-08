@@ -19,12 +19,11 @@
  */ 
 
 #include "ProductSelectionService.h"
-#include "gmock/gmock.h"
 
-using namespace testing;
-
-TEST(ProductSelectionServiceTest, WhenColaSelectedThenDispenseCola)
+ProductSelectionService::ProductSelectionService()
 {
-	ProductSelectionService service;
+}
 
+ProductSelectionService::~ProductSelectionService()
+{
 }

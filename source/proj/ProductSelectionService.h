@@ -17,14 +17,14 @@
     You should have received a copy of the GNU General Public License
     along with KataForPT.  If not, see <http://www.gnu.org/licenses/>.
  */ 
+#ifndef GB_PRODUCT_SELECTION_SERVICE_H
+#define GB_PRODUCT_SELECTION_SERVICE_H
 
-#include "ProductSelectionService.h"
-#include "gmock/gmock.h"
-
-using namespace testing;
-
-TEST(ProductSelectionServiceTest, WhenColaSelectedThenDispenseCola)
+class ProductSelectionService
 {
-	ProductSelectionService service;
+	public:
+		ProductSelectionService();
+		~ProductSelectionService();
+};
 
-}
+#endif
