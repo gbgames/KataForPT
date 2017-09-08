@@ -125,3 +125,5 @@ Now we can finish the validator test. I wonder if I'm giving the validator too m
 Well, I'll think about it. In the meantime, I want to refactor the coin adding helpers out, and I also think I should shore up the previous validator test to ensure that no cola has been dispensed.
 
 Oh, and apparently I forgot to refactor the duplicate code out of the two validator tests.
+
+Now to add tests to buy chips and candy for a well-balanced meal.
