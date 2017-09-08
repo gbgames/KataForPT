@@ -109,3 +109,5 @@ Now, should the ProductSelectionService act in a similar way to the coin accepte
 Now that I have the select cola test passing, I think I'll add an assertion that there is no dispensed item to start. It will allow for another value to be returned, and I think it will be useful to show that something has changed when you select a product.
 
 Adding the chips and candy products is pretty straightforward. All the infrastructure is already there.
+
+Perhaps it would be good to get back to an empty dispenser.

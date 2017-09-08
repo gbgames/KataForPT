@@ -58,3 +58,13 @@ TEST_F(ProductSelectionServiceFixture, WhenCandySelectedThenDispenseCandy)
 
 	EXPECT_THAT(service.dispensedItem(), Eq(CANDY_PRODUCT));
 }
+
+TEST_F(ProductSelectionServiceFixture, AllCustomerToRetrieveItem)
+{
+	service.select(COLA_PRODUCT);
+	ASSERT_THAT(service.dispensedItem(), Eq(COLA_PRODUCT));
+
+	service.retrieveItem();
+
+	EXPECT_THAT(service.dispensedItem(), Eq(NO_PRODUCT));
+}
