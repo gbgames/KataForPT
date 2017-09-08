@@ -67,5 +67,18 @@ TEST_F(SelectionValidatorFixture, GivenEnoughCoinsInsertedWhenChipsSelectedThenS
 	EXPECT_THAT(validator.select(CHIPS_PRODUCT), Eq(PRODUCT_DISPENSED));
 	EXPECT_THAT(accepter.currentAmount(), Eq(0));
 	EXPECT_THAT(selectionService.dispensedItem(), Eq(CHIPS_PRODUCT));
+}
 
+TEST_F(SelectionValidatorFixture, GivenEnoughCoinsInsertedWhenCandySelectedThenSelectCandy)
+{
+	CoinAccepterHelper helper(accepter);
+	helper.insertQuarter();
+	helper.insertQuarter();
+	helper.insertDime();
+	helper.insertNickel();
+	ASSERT_THAT(accepter.currentAmount(), Eq(65));
+
+	EXPECT_THAT(validator.select(CANDY_PRODUCT), Eq(PRODUCT_DISPENSED));
+	EXPECT_THAT(accepter.currentAmount(), Eq(0));
+	EXPECT_THAT(selectionService.dispensedItem(), Eq(CANDY_PRODUCT));
 }
