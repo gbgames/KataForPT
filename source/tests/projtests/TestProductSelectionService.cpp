@@ -49,3 +49,12 @@ TEST_F(ProductSelectionServiceFixture, WhenChipsSelectedThenDispenseChips)
 
 	EXPECT_THAT(service.dispensedItem(), Eq(CHIPS_PRODUCT));
 }
+
+TEST_F(ProductSelectionServiceFixture, WhenCandySelectedThenDispenseCandy)
+{
+	ASSERT_THAT(service.dispensedItem(), Eq(NO_PRODUCT));
+
+	service.select(CANDY_PRODUCT);
+
+	EXPECT_THAT(service.dispensedItem(), Eq(CANDY_PRODUCT));
+}
