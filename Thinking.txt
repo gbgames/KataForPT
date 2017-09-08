@@ -127,3 +127,5 @@ Well, I'll think about it. In the meantime, I want to refactor the coin adding h
 Oh, and apparently I forgot to refactor the duplicate code out of the two validator tests.
 
 Now to add tests to buy chips and candy for a well-balanced meal.
+
+I like this refactoring. I went from a switch statement to a map and a common chunk of code to handle both cases (and future cases).

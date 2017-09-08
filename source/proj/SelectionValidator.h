@@ -21,6 +21,8 @@
 #define GB_SELECTION_VALIDATOR_H
 
 #include "VendingProduct.h"
+#include "Cents.h"
+#include <map>
 
 enum SelectionResponse
 {
@@ -42,7 +44,7 @@ class SelectionValidator
 	private:
 		CoinAccepter & m_accepter;
 		ProductSelectionService & m_service;
-
+		std::map<VendingProduct, Cents> m_productToPriceMap;
 };
 
 #endif
