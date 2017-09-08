@@ -32,6 +32,7 @@ class ProductSelectionService
 		~ProductSelectionService();
 
 		void select(VendingProduct product);
+		VendingProduct dispensedItem() const;
 };
 
 #endif

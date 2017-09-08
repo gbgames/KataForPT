@@ -31,3 +31,8 @@ ProductSelectionService::~ProductSelectionService()
 void ProductSelectionService::select(VendingProduct product)
 {
 }
+
+VendingProduct ProductSelectionService::dispensedItem() const
+{
+	return COLA_PRODUCT;
+}
