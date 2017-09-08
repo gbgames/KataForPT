@@ -113,3 +113,7 @@ Adding the chips and candy products is pretty straightforward. All the infrastru
 Perhaps it would be good to get back to an empty dispenser.
 
 Now that we have a simple selection service, we need to create something that validates a customer's selection. It should process a selection by checking with the coin accepter to find out the customer has entered enough money. If so, then relay the selection to the selection service. If not, reject the selection. It's a nice facade that provides a simple interface and uses the coin accepter and our new selection service together.
+
+Now, obviously the selection validator has no idea what the status of the money is. That's where the coin accepter would come in, and we'll add it in the next test and so then need to inject it into the validator. And since we'll be passing through the selection to the selection service, we'll inject it as well. It's kind of a bigger jump to write this test, but I'm feeling confident. 
+
+I also notice that adding a coin candidate happens often enough that I want to extract the helpers I created in VendingMachineDisplayFixture so more tests can use them.

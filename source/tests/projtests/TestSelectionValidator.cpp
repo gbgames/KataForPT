@@ -19,6 +19,8 @@
  */ 
 
 #include "SelectionValidator.h"
+#include "CoinAccepter.h"
+#include "ProductSelectionService.h"
 #include "gmock/gmock.h"
 
 using namespace testing;
@@ -27,4 +29,20 @@ TEST(SelectionValidatorTest, GivenNoCoinsInsertedWhenColaSelectedThenRejectSelec
 {
 	SelectionValidator validator;
 	EXPECT_THAT(validator.select(COLA_PRODUCT), Eq(NOT_ENOUGH_MONEY_RESPONSE));
+}
+
+TEST(SelectionValidatorTest, GivenEnoughCoinsInsertedWhenColaSelectedThenSelectCola)
+{
+	CoinAccepter accepter;
+	ProductSelectionService selectionService;
+	SelectionValidator validator(accepter, selectionService);
+	accepter.add(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS));
+	accepter.add(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS));
+	accepter.add(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS));
+	accepter.add(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS));
+	ASSERT_THAT(accepter.currentAmount(), Eq(100));
+
+	EXPECT_THAT(validator.select(COLA_PRODUCT), Eq(PRODUCT_DISPENSED));
+	EXPECT_THAT(accepter.currentAmount(), Eq(0));
+	EXPECT_THAT(selectionService.dispensedItem(), Eq(COLA_PRODUCT));
 }
