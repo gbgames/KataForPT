@@ -17,23 +17,15 @@
     You should have received a copy of the GNU General Public License
     along with KataForPT.  If not, see <http://www.gnu.org/licenses/>.
  */ 
-#ifndef GB_PRODUCT_SELECTION_SERVICE_H
-#define GB_PRODUCT_SELECTION_SERVICE_H
+#ifndef GB_VENDING_PRODUCT_H
+#define GB_VENDING_PRODUCT_H
 
-#include "VendingProduct.h"
-
-class ProductSelectionService
+enum VendingProduct
 {
-	public:
-		ProductSelectionService();
-		~ProductSelectionService();
-
-		void select(VendingProduct product);
-		VendingProduct dispensedItem() const;
-		void retrieveItem();
-	
-	private:
-		VendingProduct m_dispensedItem;
+	NO_PRODUCT,
+	COLA_PRODUCT,
+	CHIPS_PRODUCT,
+	CANDY_PRODUCT
 };
 
 #endif
