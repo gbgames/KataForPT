@@ -20,6 +20,7 @@
 
 #include "VendingMachineDisplay.h"
 #include "CoinAccepter.h"
+#include "CoinAccepterHelpers.h"
 #include "gmock/gmock.h"
 
 using namespace testing;
@@ -27,25 +28,11 @@ using namespace testing;
 class VendingMachineDisplayFixture : public Test
 {
 	public:
-		VendingMachineDisplayFixture() : display(accepter) {}
+		VendingMachineDisplayFixture() : helper(accepter), display(accepter) {}
 		~VendingMachineDisplayFixture() {}
 
-		void insertQuarter()
-		{
-			accepter.add(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS));
-		}
-
-		void insertDime()
-		{
-			accepter.add(CoinCandidate(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS));
-		}
-
-		void insertNickel()
-		{
-			accepter.add(CoinCandidate(NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS));
-		}
-
 		CoinAccepter accepter;
+		CoinAccepterHelper helper;
 		VendingMachineDisplay display;
 };
 
@@ -56,22 +43,22 @@ TEST_F(VendingMachineDisplayFixture, ShowInsertCoinWhenThereAreNoCoinsInserted)
 
 TEST_F(VendingMachineDisplayFixture, ShowValueOfCoinsCurrentlyInserted)
 {
-	insertQuarter();
+	helper.insertQuarter();
 	EXPECT_THAT(display.ui(), StrEq("0.25"));
-	insertQuarter();
+	helper.insertQuarter();
 	EXPECT_THAT(display.ui(), StrEq("0.50"));
-	insertDime();
+	helper.insertDime();
 	EXPECT_THAT(display.ui(), StrEq("0.60"));
-	insertNickel();
+	helper.insertNickel();
 	EXPECT_THAT(display.ui(), StrEq("0.65"));
-	insertQuarter();
+	helper.insertQuarter();
 	EXPECT_THAT(display.ui(), StrEq("0.90"));
-	insertQuarter();
+	helper.insertQuarter();
 	EXPECT_THAT(display.ui(), StrEq("1.15"));
 }
 
 TEST_F(VendingMachineDisplayFixture, ShowValueOfCoinsLessThanTenCents)
 {
-	insertNickel();
+	helper.insertNickel();
 	EXPECT_THAT(display.ui(), StrEq("0.05"));
 }
