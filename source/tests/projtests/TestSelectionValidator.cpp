@@ -18,6 +18,7 @@
     along with KataForPT.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
+#include "SelectionValidator.h"
 #include "gmock/gmock.h"
 
 using namespace testing;
@@ -25,4 +26,5 @@ using namespace testing;
 TEST(SelectionValidatorTest, GivenNoCoinsInsertedWhenColaSelectedThenRejectSelection)
 {
 	SelectionValidator validator;
+	validator.select(COLA_PRODUCT);
 }
