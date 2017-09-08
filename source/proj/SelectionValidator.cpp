@@ -32,11 +32,25 @@ SelectionValidator::~SelectionValidator()
 
 SelectionResponse SelectionValidator::select(VendingProduct product)
 {
-	if (100 == m_accepter.currentAmount())
+	switch (product)
 	{
-		m_accepter.purchaseWith(100);
-		m_service.select(product);
-		return PRODUCT_DISPENSED;
+		case COLA_PRODUCT:
+			if (100 == m_accepter.currentAmount())
+			{
+				m_accepter.purchaseWith(100);
+				m_service.select(product);
+				return PRODUCT_DISPENSED;
+			}
+			break;
+
+		case CHIPS_PRODUCT:
+			if (50 == m_accepter.currentAmount())
+			{
+				m_accepter.purchaseWith(50);
+				m_service.select(product);
+				return PRODUCT_DISPENSED;
+			}
+			break;
 	}
 	return NOT_ENOUGH_MONEY_RESPONSE;
 }
