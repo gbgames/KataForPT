@@ -131,3 +131,5 @@ Now to add tests to buy chips and candy for a well-balanced meal.
 I like this refactoring. I went from a switch statement to a map and a common chunk of code to handle both cases (and future cases).
 
 Making the candy purchase test pass is a one-line change. Nice!
+
+Now, I should have a test that covers the case of adding some money and ensuring that the coins are eaten by the machine and that purchases don't occur. I expect this one to pass, and it does. It didn't drive the code to change, but it does offer a cheap way to ensure that the validator is working in this case, so I add it.

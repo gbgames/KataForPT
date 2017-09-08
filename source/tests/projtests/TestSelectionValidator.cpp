@@ -82,3 +82,14 @@ TEST_F(SelectionValidatorFixture, GivenEnoughCoinsInsertedWhenCandySelectedThenS
 	EXPECT_THAT(accepter.currentAmount(), Eq(0));
 	EXPECT_THAT(selectionService.dispensedItem(), Eq(CANDY_PRODUCT));
 }
+
+TEST_F(SelectionValidatorFixture, IfNotEnoughMoneyInsertedThenRejectPurchase)
+{
+	CoinAccepterHelper helper(accepter);
+	helper.insertQuarter();
+	ASSERT_THAT(accepter.currentAmount(), Lt(50));
+
+	EXPECT_THAT(validator.select(COLA_PRODUCT), Eq(NOT_ENOUGH_MONEY_RESPONSE));
+	EXPECT_THAT(selectionService.dispensedItem(), Eq(NO_PRODUCT));
+	EXPECT_THAT(accepter.currentAmount(), Eq(25));
+}
