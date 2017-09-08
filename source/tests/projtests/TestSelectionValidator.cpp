@@ -31,6 +31,7 @@ TEST(SelectionValidatorTest, GivenNoCoinsInsertedWhenColaSelectedThenRejectSelec
 	ProductSelectionService selectionService;
 	SelectionValidator validator(accepter, selectionService);
 	EXPECT_THAT(validator.select(COLA_PRODUCT), Eq(NOT_ENOUGH_MONEY_RESPONSE));
+	EXPECT_THAT(selectionService.dispensedItem(), Eq(NO_PRODUCT));
 }
 
 TEST(SelectionValidatorTest, GivenEnoughCoinsInsertedWhenColaSelectedThenSelectCola)
