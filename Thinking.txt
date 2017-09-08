@@ -93,3 +93,13 @@ Works great!
 
 I want to take a moment to think about how I could have done better. I allowed a test gap because I didn't recognize that there could be an issue with how the text is displayed. Instead of testing the individual results of putting in a single coin, I tried to allow a single test to handle a bigger responsibility of showing the amount totalling up as well as assume that each coin was showing correctly. I'm not going to beat myself up about it, but it is something that will give me pause the next time I find myself wanting to get by with fewer tests.
 
+-------------------------------------------------------------------------------
+On to the next feature. Part of me wants to implement Return Coins next, since it seems relatively simple since I already have part of it implemented with the rejected coins in the return slot. However, a vending machine that doesn't vend isn't very useful, so Select Product should be next if we're focused on providing value as early as possible.
+
+The description complicates the display logic a bit. If you successfully buy something, the machine says THANK YOU, but if you check it immediately again, it goes back to INSERT COIN. If you can't afford the item selected, it should say PRICE: 1.00, for example, then goes back to whatever it would display based on the money selected.
+
+The other interesting part is that the money put into the machine disappears once a succesful transaction is made. Up until now, the machine kept the money indefinitely, so the total kept increasing so long as you kept putting coins in. As this story doesn't address providing change, adding more money than needed apparently results in the machine eating the change.
+
+But besides how the display and money works, I also need to handle product selection in the first place. I see that there is a button tied to a product, and the product has a price and a description. 
+
+I can see that the display is going to need not only the coin accepter but also access to something that understands those buttons and vending products. Oh, and someone will need to determine if the customer has put in enough money.
