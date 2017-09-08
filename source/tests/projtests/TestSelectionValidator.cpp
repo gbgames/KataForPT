@@ -26,21 +26,26 @@
 
 using namespace testing;
 
-TEST(SelectionValidatorTest, GivenNoCoinsInsertedWhenColaSelectedThenRejectSelection)
+class SelectionValidatorFixture : public Test
 {
-	CoinAccepter accepter;
-	ProductSelectionService selectionService;
-	SelectionValidator validator(accepter, selectionService);
+	public:
+		SelectionValidatorFixture() : validator(accepter, selectionService) {}
+		~SelectionValidatorFixture() {}
+
+		CoinAccepter accepter;
+		ProductSelectionService selectionService;
+		SelectionValidator validator;
+};
+
+TEST_F(SelectionValidatorFixture, GivenNoCoinsInsertedWhenColaSelectedThenRejectSelection)
+{
 	EXPECT_THAT(validator.select(COLA_PRODUCT), Eq(NOT_ENOUGH_MONEY_RESPONSE));
 	EXPECT_THAT(selectionService.dispensedItem(), Eq(NO_PRODUCT));
 }
 
-TEST(SelectionValidatorTest, GivenEnoughCoinsInsertedWhenColaSelectedThenSelectCola)
+TEST_F(SelectionValidatorFixture, GivenEnoughCoinsInsertedWhenColaSelectedThenSelectCola)
 {
-	CoinAccepter accepter;
 	CoinAccepterHelper helper(accepter);
-	ProductSelectionService selectionService;
-	SelectionValidator validator(accepter, selectionService);
 	helper.insertQuarter();
 	helper.insertQuarter();
 	helper.insertQuarter();

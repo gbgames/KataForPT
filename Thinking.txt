@@ -123,3 +123,5 @@ Oh, yeah. There is no current functionality to reset the coin accepter. We'll ne
 Now we can finish the validator test. I wonder if I'm giving the validator too much responsibility. Should it be in charge of ensuring that purchaseWith() is called only when there is enough money to cover the argument passed in? It might make sense since we're already checking that we have enough money in the first place, but maybe there is some feature envy going on here. The fact that it is getting the total from the accepter, then telling the accepter what amount we're using to purchase a product (with the implication that we know that we can do so) makes me wonder if the logic to determine it should be separate. But then again, what else is the validator supposed to do? 
 
 Well, I'll think about it. In the meantime, I want to refactor the coin adding helpers out, and I also think I should shore up the previous validator test to ensure that no cola has been dispensed.
+
+Oh, and apparently I forgot to refactor the duplicate code out of the two validator tests.
