@@ -111,3 +111,5 @@ Now that I have the select cola test passing, I think I'll add an assertion that
 Adding the chips and candy products is pretty straightforward. All the infrastructure is already there.
 
 Perhaps it would be good to get back to an empty dispenser.
+
+Now that we have a simple selection service, we need to create something that validates a customer's selection. It should process a selection by checking with the coin accepter to find out the customer has entered enough money. If so, then relay the selection to the selection service. If not, reject the selection. It's a nice facade that provides a simple interface and uses the coin accepter and our new selection service together.
