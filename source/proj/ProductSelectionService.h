@@ -36,6 +36,7 @@ class ProductSelectionService
 
 		void select(VendingProduct product);
 		VendingProduct dispensedItem() const;
+		void retrieveItem();
 	
 	private:
 		VendingProduct m_dispensedItem;

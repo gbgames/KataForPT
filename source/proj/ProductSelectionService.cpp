@@ -37,3 +37,8 @@ VendingProduct ProductSelectionService::dispensedItem() const
 {
 	return m_dispensedItem;
 }
+
+void ProductSelectionService::retrieveItem()
+{
+	m_dispensedItem = NO_PRODUCT;
+}
