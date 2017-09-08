@@ -26,5 +26,5 @@ using namespace testing;
 TEST(SelectionValidatorTest, GivenNoCoinsInsertedWhenColaSelectedThenRejectSelection)
 {
 	SelectionValidator validator;
-	validator.select(COLA_PRODUCT);
+	EXPECT_THAT(validator.select(COLA_PRODUCT), Eq(NOT_ENOUGH_MONEY_RESPONSE));
 }
