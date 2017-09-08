@@ -22,6 +22,7 @@
 
 enum VendingProduct
 {
+	NO_PRODUCT,
 	COLA_PRODUCT
 };
 
@@ -33,6 +34,9 @@ class ProductSelectionService
 
 		void select(VendingProduct product);
 		VendingProduct dispensedItem() const;
+	
+	private:
+		VendingProduct m_dispensedItem;
 };
 
 #endif

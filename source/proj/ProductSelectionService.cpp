@@ -20,7 +20,7 @@
 
 #include "ProductSelectionService.h"
 
-ProductSelectionService::ProductSelectionService()
+ProductSelectionService::ProductSelectionService() : m_dispensedItem(NO_PRODUCT)
 {
 }
 
@@ -30,9 +30,10 @@ ProductSelectionService::~ProductSelectionService()
 
 void ProductSelectionService::select(VendingProduct product)
 {
+	m_dispensedItem = product;
 }
 
 VendingProduct ProductSelectionService::dispensedItem() const
 {
-	return COLA_PRODUCT;
+	return m_dispensedItem;
 }
