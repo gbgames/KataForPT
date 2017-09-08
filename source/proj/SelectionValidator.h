@@ -20,11 +20,15 @@
 #ifndef GB_SELECTION_VALIDATOR_H
 #define GB_SELECTION_VALIDATOR_H
 
+#include "VendingProduct.h"
+
 class SelectionValidator
 {
 	public:
 		SelectionValidator();
 		~SelectionValidator();
+
+		void select(VendingProduct product);
 };
 
 #endif
