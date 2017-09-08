@@ -103,3 +103,5 @@ The other interesting part is that the money put into the machine disappears onc
 But besides how the display and money works, I also need to handle product selection in the first place. I see that there is a button tied to a product, and the product has a price and a description. 
 
 I can see that the display is going to need not only the coin accepter but also access to something that understands those buttons and vending products. Oh, and someone will need to determine if the customer has put in enough money.
+
+Now, should the ProductSelectionService act in a similar way to the coin accepter in that it controls both selection and retrieval? I think for now it makes sense. Perhaps later we might want to have a separate object manage just the inventory. In the meantime, I think the service should be pretty ignorant about money. It allows for the selection and dispensing of items, and that's it. 

@@ -28,4 +28,5 @@ TEST(ProductSelectionServiceTest, WhenColaSelectedThenDispenseCola)
 	ProductSelectionService service;
 	service.select(COLA_PRODUCT);
 
+	EXPECT_THAT(service.dispensedItem(), Eq(COLA_PRODUCT));
 }
