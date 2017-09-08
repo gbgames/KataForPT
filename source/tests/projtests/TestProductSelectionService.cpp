@@ -23,9 +23,17 @@
 
 using namespace testing;
 
-TEST(ProductSelectionServiceTest, WhenColaSelectedThenDispenseCola)
+class ProductSelectionServiceFixture : public Test
 {
-	ProductSelectionService service;
+	public:
+		ProductSelectionServiceFixture() {}
+		~ProductSelectionServiceFixture() {}
+
+		ProductSelectionService service;
+};
+
+TEST_F(ProductSelectionServiceFixture, WhenColaSelectedThenDispenseCola)
+{
 	ASSERT_THAT(service.dispensedItem(), Eq(NO_PRODUCT));
 
 	service.select(COLA_PRODUCT);
@@ -33,9 +41,8 @@ TEST(ProductSelectionServiceTest, WhenColaSelectedThenDispenseCola)
 	EXPECT_THAT(service.dispensedItem(), Eq(COLA_PRODUCT));
 }
 
-TEST(ProductSelectionServiceTest, WhenChipsSelectedThenDispenseChips)
+TEST_F(ProductSelectionServiceFixture, WhenChipsSelectedThenDispenseChips)
 {
-	ProductSelectionService service;
 	ASSERT_THAT(service.dispensedItem(), Eq(NO_PRODUCT));
 
 	service.select(CHIPS_PRODUCT);
