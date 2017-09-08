@@ -66,3 +66,15 @@ TEST_F(CoinAccepterFixture, WhenAnInvalidCoinIsAddedThenDoNotAcceptIt)
 
 	EXPECT_THAT(accepter.returnedCoins().at(0), Eq(candidate));
 }
+
+TEST_F(CoinAccepterFixture, AcceptingPurchaseWillResetTheTotalAmountInserted)
+{
+	accepter.add(CoinCandidate(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS));
+	accepter.add(CoinCandidate(NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS));
+	accepter.add(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS));
+	ASSERT_THAT(accepter.currentAmount(), Eq(40));
+
+	accepter.purchaseWith(40);
+
+	EXPECT_THAT(accepter.currentAmount(), Eq(0));
+}

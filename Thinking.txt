@@ -118,4 +118,4 @@ Now, obviously the selection validator has no idea what the status of the money 
 
 I also notice that adding a coin candidate happens often enough that I want to extract the helpers I created in VendingMachineDisplayFixture so more tests can use them.
 
-Oh, yeah. There is no current functionality to reset the coin accepter. We'll need to change that, as this story asks that we need to be able to have the display say INSERT COIN again with the current amount reset to $0.00.
+Oh, yeah. There is no current functionality to reset the coin accepter. We'll need to change that, as this story asks that we need to be able to have the display say INSERT COIN again with the current amount reset to $0.00. I was originally going to create a reset() function, but I didn't like the name. On top of it, knowing that eventually we need to provide change, I think it makes sense to provide an argument that indicates how much money to keep, with the idea that the coin return will have the remainder returned.
