@@ -26,6 +26,8 @@ using namespace testing;
 TEST(ProductSelectionServiceTest, WhenColaSelectedThenDispenseCola)
 {
 	ProductSelectionService service;
+	ASSERT_THAT(service.dispensedItem(), Eq(NO_PRODUCT));
+
 	service.select(COLA_PRODUCT);
 
 	EXPECT_THAT(service.dispensedItem(), Eq(COLA_PRODUCT));

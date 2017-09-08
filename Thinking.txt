@@ -105,3 +105,5 @@ But besides how the display and money works, I also need to handle product selec
 I can see that the display is going to need not only the coin accepter but also access to something that understands those buttons and vending products. Oh, and someone will need to determine if the customer has put in enough money.
 
 Now, should the ProductSelectionService act in a similar way to the coin accepter in that it controls both selection and retrieval? I think for now it makes sense. Perhaps later we might want to have a separate object manage just the inventory. In the meantime, I think the service should be pretty ignorant about money. It allows for the selection and dispensing of items, and that's it. 
+
+Now that I have the select cola test passing, I think I'll add an assertion that there is no dispensed item to start. It will allow for another value to be returned, and I think it will be useful to show that something has changed when you select a product.
