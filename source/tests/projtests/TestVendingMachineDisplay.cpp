@@ -72,3 +72,15 @@ TEST_F(VendingMachineDisplayFixture, GivenNotEnoughMoneyInMachineWhenColaSelecte
 	validator.select(COLA_PRODUCT);
 	EXPECT_THAT(display.ui(), StrEq("PRICE: 1.00"));
 }
+
+TEST_F(VendingMachineDisplayFixture, GivenNotEnoughMoneyInMachineWhenChipsSelectedThenInformCustomerOfPrice)
+{
+	validator.select(CHIPS_PRODUCT);
+	EXPECT_THAT(display.ui(), StrEq("PRICE: 0.50"));
+}
+
+TEST_F(VendingMachineDisplayFixture, GivenNotEnoughMoneyInMachineWhenCandySelectedThenInformCustomerOfPrice)
+{
+	validator.select(CANDY_PRODUCT);
+	EXPECT_THAT(display.ui(), StrEq("PRICE: 0.65"));
+}

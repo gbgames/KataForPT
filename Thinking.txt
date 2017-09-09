@@ -149,3 +149,7 @@ NOW the display can pay attention to the validator. Normally I'm not too worried
 I suppose it makes sense that the app test would need to be updated since the display requires a new member injected into it, but my uncomfortable feeling from before is a little worse now. I'm updating the display, and now unrelated code and tests had to be impacted. 
 
 We need the display to reset. It can't tell you the price forever!  However, I think it makes sense to require that functionality in the app rather than have the display worry about it. It's already doing a lot, and we expect ui(), which I see now is horribly named, to do potentially too much as it is. It currently needs to determine whether to show the price needed or the amount inserted. Is there a way to make the code more readable?
+
+ui() looks way better now, and someone reading it would find it a lot easier to follow. Including me. 
+
+First, let's make sure all the products are covered, and then we'll worry about thanking the customer.
