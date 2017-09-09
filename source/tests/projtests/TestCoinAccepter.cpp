@@ -78,3 +78,10 @@ TEST_F(CoinAccepterFixture, AcceptingPurchaseWillResetTheTotalAmountInserted)
 
 	EXPECT_THAT(accepter.currentAmount(), Eq(0));
 }
+
+TEST_F(CoinAccepterFixture, AddChangeToReturnToCustomer)
+{
+	accepter.makeChange(25);
+
+	EXPECT_THAT(accepter.returnedCoins().at(0), Eq(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS)));
+}
