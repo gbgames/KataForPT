@@ -237,3 +237,17 @@ TEST_F(VendingMachineAppFixture, WhenPriceDisplayedThenResetMachine)
 	ASSERT_THAT(getNextOutputLine(), StrEq("PRICE: 1.00"));
 	EXPECT_THAT(getNextOutputLine(), StrEq("INSERT COIN"));
 }
+
+TEST_F(VendingMachineAppFixture, GivenSomeMoneyInsertedWhenPriceDisplayedThenResetMachineAndDisplayAmountInserted)
+{
+	std::stringstream input;
+	input << "qqa1." << std::endl;
+
+	app.run(input);
+
+	ASSERT_THAT(getNextOutputLine(), StrEq("INSERT COIN"));
+	ASSERT_THAT(getNextOutputLine(), StrEq("0.25"));
+	ASSERT_THAT(getNextOutputLine(), StrEq("0.50"));
+	ASSERT_THAT(getNextOutputLine(), StrEq("PRICE: 1.00"));
+	EXPECT_THAT(getNextOutputLine(), StrEq("0.50"));
+}
