@@ -48,6 +48,7 @@ class VendingMachineApp
 		bool m_showReturnedCoins;
 		ButtonID m_firstID;
 		ButtonID m_secondID;
+		bool m_showOutput;
 };
 
 #endif

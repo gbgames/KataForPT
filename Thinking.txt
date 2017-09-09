@@ -179,3 +179,12 @@ INSERT COIN
 PRICE: 1.00
 
 Yep. So, while I could have changed the test to avoid the test failure, I'll need to change how the implementation itself works to make it feel right.
+
+Ick. I'm not happy with how the code is getting ugly, but it is passing the tests. Note that if you press 2 before pressing b...well, it's probably undefined what happens:
+
+$ ./KataForPT-bin 
+INSERT COIN
+2
+PRICE: 0.00
+
+Ok, well, it's surprising and not how it should work anyway.
