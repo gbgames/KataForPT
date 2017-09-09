@@ -144,3 +144,23 @@ TEST_F(CoinAccepterFixture, ReturnMultipleCoinsWhenMakingChange)
 	EXPECT_THAT(accepter.returnedCoins().at(4), Eq(CoinCandidate(NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS)));
 }
 
+TEST_F(CoinAccepterFixture, ReturnSameCoinsThatWereInserted)
+{
+	for (int i = 0; i < 4; ++i)
+	{
+		accepter.add(CoinCandidate(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS));
+	}
+	accepter.add(CoinCandidate(NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS));
+	accepter.add(CoinCandidate(NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS));
+
+	accepter.returnMoney();
+
+	EXPECT_THAT(accepter.returnedCoins().size(), Eq(6));
+	EXPECT_THAT(accepter.returnedCoins().at(0), Eq(CoinCandidate(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS)));
+	EXPECT_THAT(accepter.returnedCoins().at(1), Eq(CoinCandidate(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS)));
+	EXPECT_THAT(accepter.returnedCoins().at(2), Eq(CoinCandidate(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS)));
+	EXPECT_THAT(accepter.returnedCoins().at(3), Eq(CoinCandidate(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS)));
+	EXPECT_THAT(accepter.returnedCoins().at(4), Eq(CoinCandidate(NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS)));
+	EXPECT_THAT(accepter.returnedCoins().at(5), Eq(CoinCandidate(NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS)));
+}
+

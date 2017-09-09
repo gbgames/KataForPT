@@ -298,4 +298,10 @@ Returned: quarter
 
 Beautiful! 
 
+-------------------------------------------------------------------------------
 
+For our next story, let's Return Coins. 
+
+A lot of the infrastructure is in place, and so now we'll need to change how we keep track of the customer's money. The coin accepter keeps a running total, but now I want it to keep track of each coin inserted. 
+
+Our test will add a bunch of coins, then expect to get them back instead of getting quarters back. This behavior is different from when change is being made.
