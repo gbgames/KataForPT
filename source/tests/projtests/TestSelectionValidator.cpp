@@ -144,5 +144,3 @@ TEST_F(SelectionValidatorFixture, PreventAskingForMoneyRequiredIfProductPurchase
 
 	EXPECT_THROW(validator.moneyRequired(), std::runtime_error);
 }
-
-

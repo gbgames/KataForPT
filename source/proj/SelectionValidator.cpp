@@ -61,7 +61,7 @@ void SelectionValidator::reset()
 
 Cents SelectionValidator::moneyRequired() const
 {
-	if (NO_RESPONSE == m_response) 
+	if (NOT_ENOUGH_MONEY_RESPONSE != m_response) 
 	{
 		throw std::runtime_error("moneyRequired() called when not attempting purchase.");
 	}
