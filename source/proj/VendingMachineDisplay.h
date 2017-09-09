@@ -35,9 +35,10 @@ class VendingMachineDisplay
 		std::string ui() const;
 	
 	private:
-		std::string amountUI(Cents amount) const;
 		bool shouldShowPrice() const;
 		std::string priceOutput() const;
+		std::string promptOutput() const;
+		std::string amountUI(Cents amount) const;
 		CoinAccepter & m_accepter;
 		SelectionValidator & m_validator;
 };

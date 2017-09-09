@@ -39,17 +39,7 @@ std::string VendingMachineDisplay::ui() const
 		return priceOutput();
 	}
 
-	Cents currentAmount = m_accepter.currentAmount();
-
-	return (0 == currentAmount) ? "INSERT COIN" : amountUI(currentAmount);
-}
-
-std::string VendingMachineDisplay::amountUI(Cents amount) const
-{
-	std::stringstream amountText;
-	amountText << amount/100 << "." << std::setw(2) << std::setfill('0') << amount % 100;
-
-	return amountText.str();
+	return promptOutput();
 }
 
 bool VendingMachineDisplay::shouldShowPrice() const
@@ -61,3 +51,19 @@ std::string VendingMachineDisplay::priceOutput() const
 {
 	return "PRICE: " + amountUI(m_validator.moneyRequired());
 }
+
+std::string VendingMachineDisplay::promptOutput() const
+{
+	Cents currentAmount = m_accepter.currentAmount();
+	return (0 == currentAmount) ? "INSERT COIN" : amountUI(currentAmount);
+}
+
+std::string VendingMachineDisplay::amountUI(Cents amount) const
+{
+	std::stringstream amountText;
+	amountText << amount/100 << "." << std::setw(2) << std::setfill('0') << amount % 100;
+
+	return amountText.str();
+}
+
+
