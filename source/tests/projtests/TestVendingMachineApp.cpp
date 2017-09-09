@@ -41,7 +41,7 @@ class VendingMachineAppFixture : public Test
 			return line;
 		}
 
-		AssertionResult purchaseCola()
+		AssertionResult verifyColaMoneyAdded()
 		{
 			std::stringstream input;
 			input << "qqqqa1." << std::endl;
@@ -56,16 +56,38 @@ class VendingMachineAppFixture : public Test
 			{
 				return AssertionFailure() << "Something went wrong when inserting money to purchase cola.";
 			}
+
+			return AssertionSuccess();
+		}
+
+		AssertionResult purchaseCola()
+		{
+			AssertionResult result = verifyColaMoneyAdded();
+
 			if ("THANK YOU" != getNextOutputLine())
 			{
-				return AssertionFailure() << "Customer was not thanked for purchasing cola";
+				if (!result)
+				{
+					return result << " AND Customer was not thanked for purchasing cola";
+				} 
+				else
+				{
+					return AssertionFailure() << "Customer was not thanked for purchasing cola";
+				}
 			}
 			if (COLA_PRODUCT != selectionService.dispensedItem())
 			{
-				return AssertionFailure() << "Cola was not dispensed to customer. What was found was item # " << selectionService.dispensedItem();
+				if (!result)
+				{
+					return result << "Cola was not dispensed to customer. What was found was item # " << selectionService.dispensedItem();
+				}
+				else
+				{
+					return AssertionFailure() << "Cola was not dispensed to customer. What was found was item # " << selectionService.dispensedItem();
+				}
 			}
 
-			return AssertionSuccess();
+			return result;
 		}
 
 	std::stringstream output;
@@ -192,16 +214,7 @@ TEST_F(VendingMachineAppFixture, WhenCustomerSelectsWrongButtonCombinationThenIg
 
 TEST_F(VendingMachineAppFixture, GivenCustomerAddsEnoughMoneyWhenSelectingProductThenDispenseAndThankCustomer)
 {
-	std::stringstream input;
-	input << "qqqqa1" << std::endl;
-
-	app.run(input);
-
-	ASSERT_THAT(getNextOutputLine(), StrEq("INSERT COIN"));
-	ASSERT_THAT(getNextOutputLine(), StrEq("0.25"));
-	ASSERT_THAT(getNextOutputLine(), StrEq("0.50"));
-	ASSERT_THAT(getNextOutputLine(), StrEq("0.75"));
-	ASSERT_THAT(getNextOutputLine(), StrEq("1.00"));
+	verifyColaMoneyAdded();
 
 	EXPECT_THAT(getNextOutputLine(), StrEq("THANK YOU"));
 	EXPECT_THAT(selectionService.dispensedItem(), Eq(COLA_PRODUCT));
