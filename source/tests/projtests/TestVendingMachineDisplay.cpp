@@ -84,3 +84,13 @@ TEST_F(VendingMachineDisplayFixture, GivenNotEnoughMoneyInMachineWhenCandySelect
 	validator.select(CANDY_PRODUCT);
 	EXPECT_THAT(display.ui(), StrEq("PRICE: 0.65"));
 }
+
+TEST_F(VendingMachineDisplayFixture, WhenProductPurchasedSuccessfullyThenDisplayThanks)
+{
+	helper.insertQuarter();
+	helper.insertQuarter();
+	validator.select(CHIPS_PRODUCT);
+	ASSERT_THAT(selectionService.dispensedItem(), Eq(CHIPS_PRODUCT));
+
+	EXPECT_THAT(display.ui(), StrEq("THANK YOU"));
+}
