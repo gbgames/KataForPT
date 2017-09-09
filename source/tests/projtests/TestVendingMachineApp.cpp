@@ -225,3 +225,15 @@ TEST_F(VendingMachineAppFixture, WhenCustomerHasBeenThankedThenResetMachine)
 	ASSERT_TRUE(purchaseCola());
 	EXPECT_THAT(getNextOutputLine(), StrEq("INSERT COIN"));
 }
+
+TEST_F(VendingMachineAppFixture, WhenPriceDisplayedThenResetMachine)
+{
+	std::stringstream input;
+	input << "a1." << std::endl;
+
+	app.run(input);
+
+	ASSERT_THAT(getNextOutputLine(), StrEq("INSERT COIN"));
+	ASSERT_THAT(getNextOutputLine(), StrEq("PRICE: 1.00"));
+	EXPECT_THAT(getNextOutputLine(), StrEq("INSERT COIN"));
+}

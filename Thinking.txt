@@ -215,3 +215,5 @@ Hmm. The test passed. And we didn't need to change the implementation to make it
 We show the price of a selected product and we thank the customer for buying it. Now we need the vending machine to reset itself for the next transaction. We'll use '.' to mean "idle", but any non-processed character will do.
 
 I refactored the test by extracting out the setup code to purchase a cola. I decided to keep the previous test as is, although now the duplication is still there. Perhaps I can separate the setup code better.
+
+It should also reset after the price is displayed, not just when we successfully buy something.
