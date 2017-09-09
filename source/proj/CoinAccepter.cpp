@@ -63,6 +63,8 @@ std::vector<CoinCandidate> CoinAccepter::returnedCoins() const
 
 void CoinAccepter::purchaseWith(Cents amount)
 {
+	Cents change = m_currentAmount - amount;
+	makeChange(change);
 	m_currentAmount = 0;
 }
 
