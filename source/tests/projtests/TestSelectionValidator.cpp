@@ -39,7 +39,8 @@ class SelectionValidatorFixture : public Test
 
 TEST_F(SelectionValidatorFixture, GivenNoCoinsInsertedWhenColaSelectedThenRejectSelection)
 {
-	EXPECT_THAT(validator.select(COLA_PRODUCT), Eq(NOT_ENOUGH_MONEY_RESPONSE));
+	validator.select(COLA_PRODUCT);
+	EXPECT_THAT(validator.currentResponse(), Eq(NOT_ENOUGH_MONEY_RESPONSE));
 	EXPECT_THAT(selectionService.dispensedItem(), Eq(NO_PRODUCT));
 }
 
@@ -52,7 +53,8 @@ TEST_F(SelectionValidatorFixture, GivenEnoughCoinsInsertedWhenColaSelectedThenSe
 	helper.insertQuarter();
 	ASSERT_THAT(accepter.currentAmount(), Eq(100));
 
-	EXPECT_THAT(validator.select(COLA_PRODUCT), Eq(PRODUCT_DISPENSED));
+	validator.select(COLA_PRODUCT);
+	EXPECT_THAT(validator.currentResponse(), Eq(PRODUCT_DISPENSED));
 	EXPECT_THAT(accepter.currentAmount(), Eq(0));
 	EXPECT_THAT(selectionService.dispensedItem(), Eq(COLA_PRODUCT));
 }
@@ -64,7 +66,8 @@ TEST_F(SelectionValidatorFixture, GivenEnoughCoinsInsertedWhenChipsSelectedThenS
 	helper.insertQuarter();
 	ASSERT_THAT(accepter.currentAmount(), Eq(50));
 
-	EXPECT_THAT(validator.select(CHIPS_PRODUCT), Eq(PRODUCT_DISPENSED));
+	validator.select(CHIPS_PRODUCT);
+	EXPECT_THAT(validator.currentResponse(), Eq(PRODUCT_DISPENSED));
 	EXPECT_THAT(accepter.currentAmount(), Eq(0));
 	EXPECT_THAT(selectionService.dispensedItem(), Eq(CHIPS_PRODUCT));
 }
@@ -78,7 +81,8 @@ TEST_F(SelectionValidatorFixture, GivenEnoughCoinsInsertedWhenCandySelectedThenS
 	helper.insertNickel();
 	ASSERT_THAT(accepter.currentAmount(), Eq(65));
 
-	EXPECT_THAT(validator.select(CANDY_PRODUCT), Eq(PRODUCT_DISPENSED));
+	validator.select(CANDY_PRODUCT);
+	EXPECT_THAT(validator.currentResponse(), Eq(PRODUCT_DISPENSED));
 	EXPECT_THAT(accepter.currentAmount(), Eq(0));
 	EXPECT_THAT(selectionService.dispensedItem(), Eq(CANDY_PRODUCT));
 }
@@ -88,8 +92,9 @@ TEST_F(SelectionValidatorFixture, IfNotEnoughMoneyInsertedThenRejectPurchase)
 	CoinAccepterHelper helper(accepter);
 	helper.insertQuarter();
 	ASSERT_THAT(accepter.currentAmount(), Lt(50));
-
-	EXPECT_THAT(validator.select(COLA_PRODUCT), Eq(NOT_ENOUGH_MONEY_RESPONSE));
+	
+	validator.select(COLA_PRODUCT);
+	EXPECT_THAT(validator.currentResponse(), Eq(NOT_ENOUGH_MONEY_RESPONSE));
 	EXPECT_THAT(selectionService.dispensedItem(), Eq(NO_PRODUCT));
 	EXPECT_THAT(accepter.currentAmount(), Eq(25));
 }
