@@ -21,6 +21,8 @@
 #include "VendingMachineDisplay.h"
 #include "CoinAccepter.h"
 #include "CoinAccepterHelpers.h"
+#include "SelectionValidator.h"
+#include "ProductSelectionService.h"
 #include "gmock/gmock.h"
 
 using namespace testing;
@@ -28,11 +30,13 @@ using namespace testing;
 class VendingMachineDisplayFixture : public Test
 {
 	public:
-		VendingMachineDisplayFixture() : helper(accepter), display(accepter) {}
+		VendingMachineDisplayFixture() : helper(accepter), validator(accepter, selectionService), display(accepter, validator) {}
 		~VendingMachineDisplayFixture() {}
 
 		CoinAccepter accepter;
 		CoinAccepterHelper helper;
+		ProductSelectionService selectionService;
+		SelectionValidator validator;
 		VendingMachineDisplay display;
 };
 
@@ -61,4 +65,10 @@ TEST_F(VendingMachineDisplayFixture, ShowValueOfCoinsLessThanTenCents)
 {
 	helper.insertNickel();
 	EXPECT_THAT(display.ui(), StrEq("0.05"));
+}
+
+TEST_F(VendingMachineDisplayFixture, GivenNotEnoughMoneyInMachineWhenColaSelectedThenInformCustomerOfPrice)
+{
+	validator.select(COLA_PRODUCT);
+	EXPECT_THAT(display.ui(), StrEq("PRICE: 1.00"));
 }
