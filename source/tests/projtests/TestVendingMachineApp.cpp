@@ -41,6 +41,33 @@ class VendingMachineAppFixture : public Test
 			return line;
 		}
 
+		AssertionResult purchaseCola()
+		{
+			std::stringstream input;
+			input << "qqqqa1." << std::endl;
+
+			app.run(input);
+
+			if ("INSERT COIN" != getNextOutputLine()
+				|| "0.25" != getNextOutputLine()
+				|| "0.50" != getNextOutputLine()
+				|| "0.75" != getNextOutputLine()
+				|| "1.00" != getNextOutputLine())
+			{
+				return AssertionFailure() << "Something went wrong when inserting money to purchase cola.";
+			}
+			if ("THANK YOU" != getNextOutputLine())
+			{
+				return AssertionFailure() << "Customer was not thanked for purchasing cola";
+			}
+			if (COLA_PRODUCT != selectionService.dispensedItem())
+			{
+				return AssertionFailure() << "Cola was not dispensed to customer. What was found was item # " << selectionService.dispensedItem();
+			}
+
+			return AssertionSuccess();
+		}
+
 	std::stringstream output;
 	CoinAccepter accepter;
 	ProductSelectionService selectionService;
@@ -182,17 +209,6 @@ TEST_F(VendingMachineAppFixture, GivenCustomerAddsEnoughMoneyWhenSelectingProduc
 
 TEST_F(VendingMachineAppFixture, WhenCustomerHasBeenThankedThenResetMachine)
 {
-	std::stringstream input;
-	input << "qqqqa1." << std::endl;
-
-	app.run(input);
-
-	ASSERT_THAT(getNextOutputLine(), StrEq("INSERT COIN"));
-	ASSERT_THAT(getNextOutputLine(), StrEq("0.25"));
-	ASSERT_THAT(getNextOutputLine(), StrEq("0.50"));
-	ASSERT_THAT(getNextOutputLine(), StrEq("0.75"));
-	ASSERT_THAT(getNextOutputLine(), StrEq("1.00"));
-	ASSERT_THAT(getNextOutputLine(), StrEq("THANK YOU"));
-
+	ASSERT_TRUE(purchaseCola());
 	EXPECT_THAT(getNextOutputLine(), StrEq("INSERT COIN"));
 }
