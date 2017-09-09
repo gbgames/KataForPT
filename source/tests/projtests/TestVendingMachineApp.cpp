@@ -270,3 +270,21 @@ TEST_F(VendingMachineAppFixture, GivenValidChangeWhenUserEntersRThenAppDisplaysR
 
 	EXPECT_THAT(getNextOutputLine(), StrEq("Returned: quarter, dime, nickel"));
 }
+
+TEST_F(VendingMachineAppFixture, WhenCustomerEntersCapitalRThenReturnMoney)
+{
+	std::stringstream input;
+	input << "qqqdnRr" << std::endl;
+
+	app.run(input);
+
+	ASSERT_THAT(getNextOutputLine(), StrEq("INSERT COIN"));
+	ASSERT_THAT(getNextOutputLine(), StrEq("0.25"));
+	ASSERT_THAT(getNextOutputLine(), StrEq("0.50"));
+	ASSERT_THAT(getNextOutputLine(), StrEq("0.75"));
+	ASSERT_THAT(getNextOutputLine(), StrEq("0.85"));
+	ASSERT_THAT(getNextOutputLine(), StrEq("0.90"));
+
+	EXPECT_THAT(getNextOutputLine(), StrEq("INSERT COIN"));
+	EXPECT_THAT(getNextOutputLine(), StrEq("Returned: quarter, quarter, quarter, dime, nickel"));
+}
