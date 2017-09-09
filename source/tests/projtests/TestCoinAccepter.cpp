@@ -119,3 +119,15 @@ TEST_F(CoinAccepterFixture, ReturnMultipleDimesWhenMakingChange)
 	EXPECT_THAT(accepter.returnedCoins().at(1), Eq(CoinCandidate(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS)));
 }
 
+TEST_F(CoinAccepterFixture, ReturnMultipleCoinsWhenMakingChange)
+{
+	accepter.makeChange(90);
+
+	EXPECT_THAT(accepter.returnedCoins().size(), Eq(5));
+	EXPECT_THAT(accepter.returnedCoins().at(0), Eq(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS)));
+	EXPECT_THAT(accepter.returnedCoins().at(1), Eq(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS)));
+	EXPECT_THAT(accepter.returnedCoins().at(2), Eq(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS)));
+	EXPECT_THAT(accepter.returnedCoins().at(3), Eq(CoinCandidate(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS)));
+	EXPECT_THAT(accepter.returnedCoins().at(4), Eq(CoinCandidate(NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS)));
+}
+
