@@ -34,7 +34,7 @@ VendingMachineDisplay::~VendingMachineDisplay()
 
 std::string VendingMachineDisplay::ui() const
 {
-	if (NOT_ENOUGH_MONEY_RESPONSE == m_validator.currentResponse())
+	if (shouldShowPrice())
 	{
 		return "PRICE: " + amountUI(m_validator.moneyRequired());
 	}
@@ -50,4 +50,9 @@ std::string VendingMachineDisplay::amountUI(Cents amount) const
 	amountText << amount/100 << "." << std::setw(2) << std::setfill('0') << amount % 100;
 
 	return amountText.str();
+}
+
+bool VendingMachineDisplay::shouldShowPrice() const
+{
+	return NOT_ENOUGH_MONEY_RESPONSE == m_validator.currentResponse();
 }
