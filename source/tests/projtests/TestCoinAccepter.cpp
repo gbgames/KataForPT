@@ -99,3 +99,13 @@ TEST_F(CoinAccepterFixture, WhenGivingChangeFor5CentsThenReturnNickel)
 
 	EXPECT_THAT(accepter.returnedCoins().at(0), Eq(CoinCandidate(NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS)));
 }
+
+TEST_F(CoinAccepterFixture, ReturnMultipleQuartersWhenMakingChange)
+{
+	accepter.makeChange(75);
+
+	EXPECT_THAT(accepter.returnedCoins().size(), Eq(3));
+	EXPECT_THAT(accepter.returnedCoins().at(0), Eq(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS)));
+	EXPECT_THAT(accepter.returnedCoins().at(1), Eq(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS)));
+	EXPECT_THAT(accepter.returnedCoins().at(2), Eq(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS)));
+}
