@@ -20,15 +20,19 @@
 #ifndef GB_VENDING_MACHINE_APP_H
 #define GB_VENDING_MACHINE_APP_H
 
+#include "VendingProduct.h"
 #include <iostream>
 
+typedef char ButtonID;
+
 class CoinAccepter;
+class SelectionValidator;
 class VendingMachineDisplay;
 
 class VendingMachineApp
 {
 	public:
-		VendingMachineApp(std::ostream & output, CoinAccepter & accepter, VendingMachineDisplay & display);
+		VendingMachineApp(std::ostream & output, CoinAccepter & accepter, VendingMachineDisplay & display, SelectionValidator & validator);
 		~VendingMachineApp();
 
 		void run(std::istream & input);
@@ -36,10 +40,14 @@ class VendingMachineApp
 	private:
 		void process(char choice);
 		std::string outputReturnedCoins();
+		VendingProduct getProductChoice();
 		std::ostream & m_output;
 		CoinAccepter & m_accepter;
 		VendingMachineDisplay & m_display;
+		SelectionValidator & m_validator;
 		bool m_showReturnedCoins;
+		ButtonID m_firstID;
+		ButtonID m_secondID;
 };
 
 #endif

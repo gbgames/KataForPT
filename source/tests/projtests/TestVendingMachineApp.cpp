@@ -30,7 +30,7 @@ using namespace testing;
 class VendingMachineAppFixture : public Test
 {
 	public:
-		VendingMachineAppFixture() : validator(accepter, selectionService), display(accepter, validator), app(output, accepter, display) {}
+		VendingMachineAppFixture() : validator(accepter, selectionService), display(accepter, validator), app(output, accepter, display, validator) {}
 		~VendingMachineAppFixture() {}
 	
 		std::string getNextOutputLine()

@@ -12,7 +12,7 @@ int main(int argc, char** argv)
 	ProductSelectionService selectionService;
 	SelectionValidator validator(accepter, selectionService);
 	VendingMachineDisplay display(accepter, validator);
-	VendingMachineApp app(std::cout, accepter, display);
+	VendingMachineApp app(std::cout, accepter, display, validator);
 	app.run(std::cin);
 
 	return 0;

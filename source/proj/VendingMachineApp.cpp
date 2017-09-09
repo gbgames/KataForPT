@@ -21,10 +21,16 @@
 #include "VendingMachineApp.h"
 #include "CoinCandidate.h"
 #include "CoinAccepter.h"
+#include "SelectionValidator.h"
 #include "VendingMachineDisplay.h"
 #include <sstream>
 
-VendingMachineApp::VendingMachineApp(std::ostream & output, CoinAccepter & accepter, VendingMachineDisplay & display) : m_output(output), m_accepter(accepter), m_display(display), m_showReturnedCoins(false)
+namespace VendingMachineAppConstants
+{
+	const char NO_ID('_');
+}
+
+VendingMachineApp::VendingMachineApp(std::ostream & output, CoinAccepter & accepter, VendingMachineDisplay & display, SelectionValidator & validator) : m_output(output), m_accepter(accepter), m_display(display), m_validator(validator), m_showReturnedCoins(false), m_firstID(VendingMachineAppConstants::NO_ID), m_secondID(VendingMachineAppConstants::NO_ID)
 {
 }
 
@@ -72,6 +78,20 @@ void VendingMachineApp::process(char choice)
 
 		case 'r':
 			m_showReturnedCoins = true;
+			break;
+
+		case 'a':
+		case 'b':
+		case 'c':
+			m_firstID = choice;
+			break;
+
+		case '1':
+		case '2':
+		case '3':
+			m_secondID = choice;
+			m_validator.select(getProductChoice());
+			break;
 	}
 }
 
@@ -89,4 +109,20 @@ std::string VendingMachineApp::outputReturnedCoins()
 	}
 
 	return coinText.str();
+}
+
+VendingProduct VendingMachineApp::getProductChoice()
+{
+	if ('a' == m_firstID && '1' == m_secondID)
+	{
+		return COLA_PRODUCT;
+	}
+	else if ('b' == m_firstID && '2' == m_secondID)
+	{
+		return CHIPS_PRODUCT;
+	}
+	else if ('c' == m_firstID && '3' == m_secondID)
+	{
+		return CANDY_PRODUCT;
+	}
 }

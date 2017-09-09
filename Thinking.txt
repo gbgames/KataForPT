@@ -157,3 +157,25 @@ First, let's make sure all the products are covered, and then we'll worry about 
 One thing I liked about my refactoring efforts on ui() before is that new code feels compelled to match the environment it's getting put into. I could have added the code inline, but it would have felt out of place, kind of like showing up to a costume party without a costume.
 
 Ok, we have the display updating to tell us the price and thanking us. Now to put it all together into a working app. I think the products can be associated with the kinds of button IDs you would normally see on a vending machine, which makes me think that there should be some kind of explanation to the user of the app. On a separate note, the display's ui() looks way better than the app's run(). 
+
+At this point, I find a surprise, and I realize that the processing of two characters separately means that the display output will be shown immediately after the first button and not just after both buttons are pressed. 
+
+That is, I'm seeing these test results:
+
+Value of: getNextOutputLine()
+Expected: is equal to "PRICE: 1.00"
+  Actual: "INSERT COIN" (of type std::string)
+
+Value of: getNextOutputLine()
+Expected: is equal to "PRICE: 0.50"
+  Actual: "PRICE: 1.00" (of type std::string)
+
+Which means the current output from the actual app probably looks weird, too:
+
+$ ./KataForPT-bin 
+INSERT COIN
+a1
+INSERT COIN
+PRICE: 1.00
+
+Yep. So, while I could have changed the test to avoid the test failure, I'll need to change how the implementation itself works to make it feel right.
