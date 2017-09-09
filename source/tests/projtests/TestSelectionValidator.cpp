@@ -37,6 +37,16 @@ class SelectionValidatorFixture : public Test
 		SelectionValidator validator;
 };
 
+TEST_F(SelectionValidatorFixture, ValidatorCanResetToNoResponse)
+{
+	EXPECT_THAT(validator.currentResponse(), Eq(NO_RESPONSE));
+	validator.select(COLA_PRODUCT);
+	ASSERT_THAT(validator.currentResponse(), Eq(NOT_ENOUGH_MONEY_RESPONSE));
+
+	validator.reset();
+	EXPECT_THAT(validator.currentResponse(), Eq(NO_RESPONSE));
+}
+
 TEST_F(SelectionValidatorFixture, GivenNoCoinsInsertedWhenColaSelectedThenRejectSelection)
 {
 	validator.select(COLA_PRODUCT);

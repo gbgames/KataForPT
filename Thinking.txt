@@ -135,3 +135,5 @@ Making the candy purchase test pass is a one-line change. Nice!
 Now, I should have a test that covers the case of adding some money and ensuring that the coins are eaten by the machine and that purchases don't occur. I expect this one to pass, and it does. It didn't drive the code to change, but it does offer a cheap way to ensure that the validator is working in this case, so I add it.
 
 Ok, so now we have a selector and a validator. Now we need to add some functionality to display messages such as THANK YOU and PRICE: x.xx. The way the display currently works is that it queries the coin accepter to find out if it has any money in it. Unfortunately, the validator does not provide access to a piece of state in a similar way, and I don't think it makes sense for the display to know about individual products to select. So let's change the interface so that selecting a product no longer returns a value, and then we'll provide a separate getter for that value.
+
+I don't like that the validator says you don't have enough money by default. I'd like to have a default state.
