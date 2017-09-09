@@ -36,7 +36,7 @@ SelectionValidator::~SelectionValidator()
 
 void SelectionValidator::select(VendingProduct product)
 {
-	m_response = NOT_ENOUGH_MONEY_RESPONSE;
+	m_response = (NO_PRODUCT == product) ? NO_RESPONSE : NOT_ENOUGH_MONEY_RESPONSE;
 	if (m_productToPriceMap.end() != m_productToPriceMap.find(product))
 	{
 		m_moneyRequired = m_productToPriceMap[product];
