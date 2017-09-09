@@ -187,4 +187,4 @@ INSERT COIN
 2
 PRICE: 0.00
 
-Ok, well, it's surprising and not how it should work anyway.
+Ok, well, it's surprising and not how it should work anyway. To fix it, it looks like the validator needs to be updated as well, as selecting NO_PRODUCT defaults to saying we don't have enough money.

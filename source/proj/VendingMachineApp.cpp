@@ -117,6 +117,10 @@ std::string VendingMachineApp::outputReturnedCoins()
 
 VendingProduct VendingMachineApp::getProductChoice()
 {
+	if (VendingMachineAppConstants::NO_ID == m_firstID || VendingMachineAppConstants::NO_ID == m_secondID)
+	{
+		return NO_PRODUCT;
+	}
 	if ('a' == m_firstID && '1' == m_secondID)
 	{
 		return COLA_PRODUCT;

@@ -140,3 +140,14 @@ TEST_F(VendingMachineAppFixture, WhenCustomerSelectsProductThenDisplayPrice)
 	EXPECT_THAT(getNextOutputLine(), StrEq("PRICE: 0.50"));
 	EXPECT_THAT(getNextOutputLine(), StrEq("PRICE: 0.65"));
 }
+
+TEST_F(VendingMachineAppFixture, WhenCustomerSelectsProductWithSecondButtonFirstThenIgnore)
+{
+	std::stringstream input;
+	input << "1" << std::endl;
+
+	app.run(input);
+
+	EXPECT_THAT(getNextOutputLine(), StrEq("INSERT COIN"));
+	EXPECT_THAT(getNextOutputLine(), StrEq("INSERT COIN"));
+}

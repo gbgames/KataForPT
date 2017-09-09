@@ -144,3 +144,9 @@ TEST_F(SelectionValidatorFixture, PreventAskingForMoneyRequiredIfProductPurchase
 
 	EXPECT_THROW(validator.moneyRequired(), std::runtime_error);
 }
+
+TEST_F(SelectionValidatorFixture, WhenSelectingNoProductThenDoNotRespond)
+{
+	validator.select(NO_PRODUCT);
+	EXPECT_THAT(validator.currentResponse(), Eq(NO_RESPONSE));
+}
