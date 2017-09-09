@@ -20,10 +20,11 @@
 
 #include "VendingMachineDisplay.h"
 #include "CoinAccepter.h"
+#include "SelectionValidator.h"
 #include <iomanip>
 #include <sstream>
 
-VendingMachineDisplay::VendingMachineDisplay(CoinAccepter & accepter) : m_accepter(accepter)
+VendingMachineDisplay::VendingMachineDisplay(CoinAccepter & accepter, SelectionValidator & validator) : m_accepter(accepter), m_validator(validator)
 {
 }
 
@@ -33,6 +34,11 @@ VendingMachineDisplay::~VendingMachineDisplay()
 
 std::string VendingMachineDisplay::ui() const
 {
+	if (NOT_ENOUGH_MONEY_RESPONSE == m_validator.currentResponse())
+	{
+		return "PRICE: " + amountUI(m_validator.moneyRequired());
+	}
+
 	Cents currentAmount = m_accepter.currentAmount();
 
 	return (0 == currentAmount) ? "INSERT COIN" : amountUI(currentAmount);

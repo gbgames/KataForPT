@@ -20,6 +20,8 @@
 
 #include "CoinAccepter.h"
 #include "VendingMachineApp.h"
+#include "ProductSelectionService.h"
+#include "SelectionValidator.h"
 #include "VendingMachineDisplay.h"
 #include "gmock/gmock.h"
 
@@ -28,7 +30,7 @@ using namespace testing;
 class VendingMachineAppFixture : public Test
 {
 	public:
-		VendingMachineAppFixture() : display(accepter), app(output, accepter, display) {}
+		VendingMachineAppFixture() : validator(accepter, selectionService), display(accepter, validator), app(output, accepter, display) {}
 		~VendingMachineAppFixture() {}
 	
 		std::string getNextOutputLine()
@@ -41,6 +43,8 @@ class VendingMachineAppFixture : public Test
 
 	std::stringstream output;
 	CoinAccepter accepter;
+	ProductSelectionService selectionService;
+	SelectionValidator validator;
 	VendingMachineDisplay display;
 	VendingMachineApp app;
 };

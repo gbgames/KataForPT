@@ -24,11 +24,12 @@
 #include <string>
 
 class CoinAccepter;
+class SelectionValidator;
 
 class VendingMachineDisplay
 {
 	public:
-		VendingMachineDisplay(CoinAccepter & accepter);
+		VendingMachineDisplay(CoinAccepter & accepter, SelectionValidator & validator);
 		~VendingMachineDisplay();
 
 		std::string ui() const;
@@ -36,6 +37,7 @@ class VendingMachineDisplay
 	private:
 		std::string amountUI(Cents amount) const;
 		CoinAccepter & m_accepter;
+		SelectionValidator & m_validator;
 };
 
 #endif
