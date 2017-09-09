@@ -40,7 +40,7 @@ void SelectionValidator::select(VendingProduct product)
 	if (m_productToPriceMap.end() != m_productToPriceMap.find(product))
 	{
 		m_moneyRequired = m_productToPriceMap[product];
-		if (m_moneyRequired == m_accepter.currentAmount())
+		if (m_moneyRequired <= m_accepter.currentAmount())
 		{
 			m_accepter.purchaseWith(m_moneyRequired);
 			m_service.select(product);
