@@ -112,13 +112,13 @@ bool VendingMachineApp::waitingOnInput() const
 	return VendingMachineAppConstants::NO_ID != m_firstID && VendingMachineAppConstants::NO_ID == m_secondID;
 }
 
-std::string VendingMachineApp::outputReturnedCoins()
+std::string VendingMachineApp::outputReturnedCoins() const
 {
 	std::stringstream coinText;
 	coinText << "Returned: ";
 	for (int i = 0; i < m_accepter.returnedCoins().size(); ++i)
 	{
-		coinText << "rejected coin";
+		coinText << coinName(m_accepter.returnedCoins().at(i));
 		if (i + 1 < m_accepter.returnedCoins().size())
 		{
 			coinText << ", ";
@@ -126,6 +126,24 @@ std::string VendingMachineApp::outputReturnedCoins()
 	}
 
 	return coinText.str();
+}
+
+std::string VendingMachineApp::coinName(const CoinCandidate & candidate) const
+{
+	if (candidate == CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS))
+	{
+		return "quarter";
+	}
+	if (candidate == CoinCandidate(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS))
+	{
+		return "dime";
+	}
+	if (candidate == CoinCandidate(NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS))
+	{
+		return "nickel";
+	}
+
+	return "rejected coin";
 }
 
 VendingProduct VendingMachineApp::getProductChoice()

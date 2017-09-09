@@ -26,6 +26,7 @@
 typedef char ButtonID;
 
 class CoinAccepter;
+struct CoinCandidate;
 class SelectionValidator;
 class VendingMachineDisplay;
 
@@ -41,7 +42,8 @@ class VendingMachineApp
 		void process(char choice);
 		void render();
 		bool waitingOnInput() const;
-		std::string outputReturnedCoins();
+		std::string outputReturnedCoins() const;
+		std::string coinName(const CoinCandidate & candidate) const;
 		VendingProduct getProductChoice();
 		std::ostream & m_output;
 		CoinAccepter & m_accepter;

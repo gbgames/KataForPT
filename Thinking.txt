@@ -284,3 +284,18 @@ r
 Returned: rejected coin
 
 It should instead indicate if it can identify the coins.
+
+And now: 
+
+$ ./KataForPT-bin 
+INSERT COIN
+qqqb2r
+0.25
+0.50
+0.75
+THANK YOU
+Returned: quarter
+
+Beautiful! 
+
+
