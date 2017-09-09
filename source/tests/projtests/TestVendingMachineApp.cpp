@@ -151,3 +151,14 @@ TEST_F(VendingMachineAppFixture, WhenCustomerSelectsProductWithSecondButtonFirst
 	EXPECT_THAT(getNextOutputLine(), StrEq("INSERT COIN"));
 	EXPECT_THAT(getNextOutputLine(), StrEq("INSERT COIN"));
 }
+
+TEST_F(VendingMachineAppFixture, WhenCustomerSelectsWrongButtonCombinationThenIgnore)
+{
+	std::stringstream input;
+	input << "a3" << std::endl;
+
+	app.run(input);
+
+	EXPECT_THAT(getNextOutputLine(), StrEq("INSERT COIN"));
+	EXPECT_THAT(getNextOutputLine(), StrEq("INSERT COIN"));
+}
