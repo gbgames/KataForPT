@@ -266,3 +266,5 @@ Now that we can return a single coin for either 25, 10, and 5 cents in change, l
 Now we add a test to return multiple denominations, and I expect it to pass just fine. It does. 
 
 So, back to the validator test. 
+
+It occurs to me that the accepter's purchaseWith() could make change. In fact, I setup this function with this idea in mind, and I apparently forgot. So, makeChange() should really be a private helper function.
