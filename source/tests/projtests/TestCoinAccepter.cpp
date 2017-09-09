@@ -89,21 +89,26 @@ TEST_F(CoinAccepterFixture, WhenGivingChangeFor25CentsThenReturnQuarter)
 
 TEST_F(CoinAccepterFixture, WhenGivingChangeFor10CentsThenReturnDime)
 {
-	accepter.makeChange(10);
+	accepter.add(CoinCandidate(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS));
+	accepter.purchaseWith(0);
 
 	EXPECT_THAT(accepter.returnedCoins().at(0), Eq(CoinCandidate(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS)));
 }
 
 TEST_F(CoinAccepterFixture, WhenGivingChangeFor5CentsThenReturnNickel)
 {
-	accepter.makeChange(5);
+	accepter.add(CoinCandidate(NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS));
+	accepter.purchaseWith(0);
 
 	EXPECT_THAT(accepter.returnedCoins().at(0), Eq(CoinCandidate(NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS)));
 }
 
 TEST_F(CoinAccepterFixture, ReturnMultipleQuartersWhenMakingChange)
 {
-	accepter.makeChange(75);
+	accepter.add(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS));
+	accepter.add(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS));
+	accepter.add(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS));
+	accepter.purchaseWith(0);
 
 	EXPECT_THAT(accepter.returnedCoins().size(), Eq(3));
 	EXPECT_THAT(accepter.returnedCoins().at(0), Eq(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS)));
@@ -113,7 +118,9 @@ TEST_F(CoinAccepterFixture, ReturnMultipleQuartersWhenMakingChange)
 
 TEST_F(CoinAccepterFixture, ReturnMultipleDimesWhenMakingChange)
 {
-	accepter.makeChange(20);
+	accepter.add(CoinCandidate(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS));
+	accepter.add(CoinCandidate(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS));
+	accepter.purchaseWith(0);
 
 	EXPECT_THAT(accepter.returnedCoins().size(), Eq(2));
 	EXPECT_THAT(accepter.returnedCoins().at(0), Eq(CoinCandidate(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS)));
@@ -122,7 +129,12 @@ TEST_F(CoinAccepterFixture, ReturnMultipleDimesWhenMakingChange)
 
 TEST_F(CoinAccepterFixture, ReturnMultipleCoinsWhenMakingChange)
 {
-	accepter.makeChange(90);
+	for (int i = 0; i < 9; ++i)
+	{
+		accepter.add(CoinCandidate(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS));
+	}
+
+	accepter.purchaseWith(0);
 
 	EXPECT_THAT(accepter.returnedCoins().size(), Eq(5));
 	EXPECT_THAT(accepter.returnedCoins().at(0), Eq(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS)));
