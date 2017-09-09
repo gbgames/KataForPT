@@ -44,15 +44,7 @@ void VendingMachineApp::run(std::istream & input)
 	do 
 	{
 		process(choice);
-		if (m_showReturnedCoins)
-		{
-			m_output << outputReturnedCoins() << std::endl;
-			m_showReturnedCoins = false;
-		}
-		else if (m_showOutput)
-		{
-			m_output << m_display.ui() << std::endl;
-		}
+		render();
 	} while (input >> choice);
 }
 
@@ -96,6 +88,19 @@ void VendingMachineApp::process(char choice)
 			m_validator.select(getProductChoice());
 			m_secondID = VendingMachineAppConstants::NO_ID;
 			break;
+	}
+}
+
+void VendingMachineApp::render()
+{
+	if (m_showReturnedCoins)
+	{
+		m_output << outputReturnedCoins() << std::endl;
+		m_showReturnedCoins = false;
+	}
+	else if (m_showOutput)
+	{
+		m_output << m_display.ui() << std::endl;
 	}
 }
 
