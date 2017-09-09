@@ -76,4 +76,8 @@ void CoinAccepter::makeChange(Cents amount)
 	{
 		m_returnedCoins.push_back(CoinCandidate(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS));
 	}
+	else if (5 == amount)
+	{
+		m_returnedCoins.push_back(CoinCandidate(NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS));
+	}
 }
