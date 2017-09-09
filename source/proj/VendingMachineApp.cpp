@@ -100,7 +100,7 @@ void VendingMachineApp::render()
 	else if (!waitingOnInput())
 	{
 		m_output << m_display.ui() << std::endl;
-		if (m_validator.currentResponse() == PRODUCT_DISPENSED)
+		if (NO_RESPONSE != m_validator.currentResponse())
 		{
 			m_validator.reset();
 		}
