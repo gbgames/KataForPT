@@ -21,6 +21,7 @@
 #include "SelectionValidator.h"
 #include "CoinAccepter.h"
 #include "ProductSelectionService.h"
+#include <stdexcept>
 
 SelectionValidator::SelectionValidator(CoinAccepter & accepter, ProductSelectionService & service) : m_accepter(accepter), m_service(service), m_response(NO_RESPONSE), m_moneyRequired(0)
 {
@@ -60,5 +61,10 @@ void SelectionValidator::reset()
 
 Cents SelectionValidator::moneyRequired() const
 {
+	if (NO_RESPONSE == m_response) 
+	{
+		throw std::runtime_error("moneyRequired() called when not attempting purchase.");
+	}
+
 	return m_moneyRequired;
 }
