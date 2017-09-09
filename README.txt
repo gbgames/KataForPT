@@ -13,3 +13,6 @@ To build this project, you'll need CMake and a C++ compiler (I used g++) install
 mkdir bin
 cmake ..
 make 
+
+TODO: 
+I did not finish implementing the kata. Still left are the stories for Sold Out and Exact Change Only.
