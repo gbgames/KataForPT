@@ -92,3 +92,10 @@ TEST_F(CoinAccepterFixture, WhenGivingChangeFor10CentsThenReturnDime)
 
 	EXPECT_THAT(accepter.returnedCoins().at(0), Eq(CoinCandidate(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS)));
 }
+
+TEST_F(CoinAccepterFixture, WhenGivingChangeFor5CentsThenReturnNickel)
+{
+	accepter.makeChange(5);
+
+	EXPECT_THAT(accepter.returnedCoins().at(0), Eq(CoinCandidate(NICKEL_WEIGHT, NICKEL_DIAMETER, NICKEL_THICKNESS)));
+}
