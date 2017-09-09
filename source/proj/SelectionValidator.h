@@ -26,6 +26,7 @@
 
 enum SelectionResponse
 {
+	NO_RESPONSE,
 	NOT_ENOUGH_MONEY_RESPONSE,
 	PRODUCT_DISPENSED
 };
@@ -41,6 +42,7 @@ class SelectionValidator
 
 		void select(VendingProduct product);
 		SelectionResponse currentResponse() const;
+		void reset();
 
 	private:
 		CoinAccepter & m_accepter;

@@ -22,7 +22,7 @@
 #include "CoinAccepter.h"
 #include "ProductSelectionService.h"
 
-SelectionValidator::SelectionValidator(CoinAccepter & accepter, ProductSelectionService & service) : m_accepter(accepter), m_service(service), m_response(NOT_ENOUGH_MONEY_RESPONSE)
+SelectionValidator::SelectionValidator(CoinAccepter & accepter, ProductSelectionService & service) : m_accepter(accepter), m_service(service), m_response(NO_RESPONSE)
 {
 	m_productToPriceMap.insert(std::make_pair(COLA_PRODUCT, 100));
 	m_productToPriceMap.insert(std::make_pair(CHIPS_PRODUCT, 50));
@@ -51,4 +51,9 @@ void SelectionValidator::select(VendingProduct product)
 SelectionResponse SelectionValidator::currentResponse() const
 {
 	return m_response;
+}
+
+void SelectionValidator::reset()
+{
+	m_response = NO_RESPONSE;
 }
