@@ -21,7 +21,7 @@
 #include "CoinCandidate.h"
 #include "CoinIdentifier.h"
 
-CoinAccepter::CoinAccepter() : m_currentAmount(0)
+CoinAccepter::CoinAccepter() 
 {
 }
 
@@ -31,7 +31,24 @@ CoinAccepter::~CoinAccepter()
 
 Cents CoinAccepter::currentAmount() const
 {
-	return m_currentAmount;
+	Cents total(0);
+	for (std::vector<CoinCandidate>::const_iterator iter = m_insertedCoins.begin(); iter != m_insertedCoins.end(); ++iter)
+	{
+		switch (CoinIdentifier::identifyCoin(iter->weight, iter->diameter, iter->thickness))
+		{
+			case QUARTER_COIN:
+				total += 25;
+				break;
+			case DIME_COIN:
+				total += 10;
+				break;
+			case NICKEL_COIN:
+				total += 5;
+				break;
+		}
+	}
+
+	return total;
 }
 
 void CoinAccepter::add(const CoinCandidate & candidate)
@@ -39,15 +56,9 @@ void CoinAccepter::add(const CoinCandidate & candidate)
 	switch (CoinIdentifier::identifyCoin(candidate.weight, candidate.diameter, candidate.thickness))
 	{
 		case QUARTER_COIN:
-			m_currentAmount += 25;
-			break;
-
 		case DIME_COIN:
-			m_currentAmount += 10;
-			break;
-
 		case NICKEL_COIN:
-			m_currentAmount += 5;
+			m_insertedCoins.push_back(candidate);
 			break;
 
 		default:
@@ -63,9 +74,18 @@ std::vector<CoinCandidate> CoinAccepter::returnedCoins() const
 
 void CoinAccepter::purchaseWith(Cents amount)
 {
-	Cents change = m_currentAmount - amount;
+	Cents change = currentAmount() - amount;
 	makeChange(change);
-	m_currentAmount = 0;
+	m_insertedCoins.clear();
+}
+
+void CoinAccepter::returnMoney()
+{
+	for(std::vector<CoinCandidate>::iterator iter = m_insertedCoins.begin(); iter != m_insertedCoins.end(); ++iter)
+	{
+		m_returnedCoins.push_back(*iter);
+	}
+	m_insertedCoins.clear();
 }
 
 void CoinAccepter::makeChange(Cents amount)
