@@ -151,7 +151,6 @@ TEST_F(SelectionValidatorFixture, WhenSelectingNoProductThenDoNotRespond)
 	EXPECT_THAT(validator.currentResponse(), Eq(NO_RESPONSE));
 }
 
-/*
 TEST_F(SelectionValidatorFixture, GivenTooMuchMoneyInsertedWhenPurchaseMadeThenMakeChange)
 {
 	CoinAccepterHelper helper(accepter);
@@ -169,4 +168,3 @@ TEST_F(SelectionValidatorFixture, GivenTooMuchMoneyInsertedWhenPurchaseMadeThenM
 	EXPECT_THAT(accepter.returnedCoins().size(), Eq(1));
 	EXPECT_THAT(accepter.returnedCoins().at(0), Eq(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS)));
 }
-*/

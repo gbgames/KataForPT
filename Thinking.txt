@@ -264,3 +264,5 @@ This test gets me most of the way there, but the CoinAccepter needs a new way to
 Now that we can return a single coin for either 25, 10, and 5 cents in change, let's return multiple coins for larger amounts. Rather than make a single test, I want to ensure multiple quarters and dimes can be returned. A little thinking makes me realize that I will never want to return multiple nickels (assuming I have enough coins to make change) as I could always return a dime for any two nickels. 
 
 Now we add a test to return multiple denominations, and I expect it to pass just fine. It does. 
+
+So, back to the validator test. 
