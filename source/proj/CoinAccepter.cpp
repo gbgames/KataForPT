@@ -68,11 +68,13 @@ void CoinAccepter::purchaseWith(Cents amount)
 
 void CoinAccepter::makeChange(Cents amount)
 {
-	if (25 == amount)
+	while (amount >= 25)
 	{
 		m_returnedCoins.push_back(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS));
+		amount -= 25;
 	}
-	else if (10 == amount)
+
+	if (10 == amount)
 	{
 		m_returnedCoins.push_back(CoinCandidate(DIME_WEIGHT, DIME_DIAMETER, DIME_THICKNESS));
 	}
