@@ -211,3 +211,5 @@ And it works as expected. So, do I add a test to cover this situation? I think s
 
 Ok, now that customers can see what the product costs, let's let them buy them!
 Hmm. The test passed. And we didn't need to change the implementation to make it work. I'll admit that surprised me. Looking into it, of course it worked. The display is doing all the hard work of figuring out what to do if the product was purchased. The app is just showing the display's output if it isn't waiting for input or showing returned coins.
+
+We show the price of a selected product and we thank the customer for buying it. Now we need the vending machine to reset itself for the next transaction. We'll use '.' to mean "idle", but any non-processed character will do.

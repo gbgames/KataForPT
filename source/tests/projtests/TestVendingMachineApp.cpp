@@ -179,3 +179,20 @@ TEST_F(VendingMachineAppFixture, GivenCustomerAddsEnoughMoneyWhenSelectingProduc
 	EXPECT_THAT(getNextOutputLine(), StrEq("THANK YOU"));
 	EXPECT_THAT(selectionService.dispensedItem(), Eq(COLA_PRODUCT));
 }
+
+TEST_F(VendingMachineAppFixture, WhenCustomerHasBeenThankedThenResetMachine)
+{
+	std::stringstream input;
+	input << "qqqqa1." << std::endl;
+
+	app.run(input);
+
+	ASSERT_THAT(getNextOutputLine(), StrEq("INSERT COIN"));
+	ASSERT_THAT(getNextOutputLine(), StrEq("0.25"));
+	ASSERT_THAT(getNextOutputLine(), StrEq("0.50"));
+	ASSERT_THAT(getNextOutputLine(), StrEq("0.75"));
+	ASSERT_THAT(getNextOutputLine(), StrEq("1.00"));
+	ASSERT_THAT(getNextOutputLine(), StrEq("THANK YOU"));
+
+	EXPECT_THAT(getNextOutputLine(), StrEq("INSERT COIN"));
+}
