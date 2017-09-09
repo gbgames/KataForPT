@@ -190,3 +190,5 @@ PRICE: 0.00
 Ok, well, it's surprising and not how it should work anyway. To fix it, it looks like the validator needs to be updated as well, as selecting NO_PRODUCT defaults to saying we don't have enough money.
 
 Pulling out the text rendering code cleans up the run() function, making it easy to see that it is split into process() and render(). I could refactor some more by creating functions for the contents of the if blocks in render(), but I think it's small enough now.
+
+Still, having a flag to determine if I should show output in a function that says it is going to render the output is kind of gross. Or at least unintuitive. Let's get rid of it with a named function that explains why we're not printing more output.

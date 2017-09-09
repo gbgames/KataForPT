@@ -30,7 +30,7 @@ namespace VendingMachineAppConstants
 	const char NO_ID('_');
 }
 
-VendingMachineApp::VendingMachineApp(std::ostream & output, CoinAccepter & accepter, VendingMachineDisplay & display, SelectionValidator & validator) : m_output(output), m_accepter(accepter), m_display(display), m_validator(validator), m_showReturnedCoins(false), m_firstID(VendingMachineAppConstants::NO_ID), m_secondID(VendingMachineAppConstants::NO_ID), m_showOutput(true)
+VendingMachineApp::VendingMachineApp(std::ostream & output, CoinAccepter & accepter, VendingMachineDisplay & display, SelectionValidator & validator) : m_output(output), m_accepter(accepter), m_display(display), m_validator(validator), m_showReturnedCoins(false), m_firstID(VendingMachineAppConstants::NO_ID), m_secondID(VendingMachineAppConstants::NO_ID)
 {
 }
 
@@ -50,7 +50,6 @@ void VendingMachineApp::run(std::istream & input)
 
 void VendingMachineApp::process(char choice)
 {
-	m_showOutput = true;
 	switch (choice)
 	{
 		case 'q':
@@ -76,7 +75,6 @@ void VendingMachineApp::process(char choice)
 		case 'a':
 		case 'b':
 		case 'c':
-			m_showOutput = false;
 			m_firstID = choice;
 			m_secondID = VendingMachineAppConstants::NO_ID;
 			break;
@@ -87,6 +85,7 @@ void VendingMachineApp::process(char choice)
 			m_secondID = choice;
 			m_validator.select(getProductChoice());
 			m_secondID = VendingMachineAppConstants::NO_ID;
+			m_firstID = VendingMachineAppConstants::NO_ID;
 			break;
 	}
 }
@@ -98,10 +97,15 @@ void VendingMachineApp::render()
 		m_output << outputReturnedCoins() << std::endl;
 		m_showReturnedCoins = false;
 	}
-	else if (m_showOutput)
+	else if (!waitingOnInput())
 	{
 		m_output << m_display.ui() << std::endl;
 	}
+}
+
+bool VendingMachineApp::waitingOnInput() const
+{
+	return VendingMachineAppConstants::NO_ID != m_firstID && VendingMachineAppConstants::NO_ID == m_secondID;
 }
 
 std::string VendingMachineApp::outputReturnedCoins()

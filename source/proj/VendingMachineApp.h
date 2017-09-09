@@ -40,6 +40,7 @@ class VendingMachineApp
 	private:
 		void process(char choice);
 		void render();
+		bool waitingOnInput() const;
 		std::string outputReturnedCoins();
 		VendingProduct getProductChoice();
 		std::ostream & m_output;
@@ -49,7 +50,6 @@ class VendingMachineApp
 		bool m_showReturnedCoins;
 		ButtonID m_firstID;
 		ButtonID m_secondID;
-		bool m_showOutput;
 };
 
 #endif
