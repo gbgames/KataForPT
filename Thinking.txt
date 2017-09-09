@@ -268,3 +268,19 @@ Now we add a test to return multiple denominations, and I expect it to pass just
 So, back to the validator test. 
 
 It occurs to me that the accepter's purchaseWith() could make change. In fact, I setup this function with this idea in mind, and I apparently forgot. So, makeChange() should really be a private helper function.
+
+Currently change is displayed in the app when you check the coin return by pressing 'r'. It's hardcoded to always say it finds rejected coins:
+
+$ ./KataForPT-bin 
+INSERT COIN
+qqqqqa1
+0.25
+0.50
+0.75
+1.00
+1.25
+THANK YOU
+r
+Returned: rejected coin
+
+It should instead indicate if it can identify the coins.
