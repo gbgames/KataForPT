@@ -38,6 +38,10 @@ std::string VendingMachineDisplay::ui() const
 	{
 		return priceOutput();
 	}
+	if (shouldShowThanks())
+	{
+		return thanksOutput();
+	}
 
 	return promptOutput();
 }
@@ -66,4 +70,12 @@ std::string VendingMachineDisplay::amountUI(Cents amount) const
 	return amountText.str();
 }
 
+bool VendingMachineDisplay::shouldShowThanks() const
+{
+	return PRODUCT_DISPENSED == m_validator.currentResponse();
+}
 
+std::string VendingMachineDisplay::thanksOutput() const
+{
+	return "THANK YOU";
+}

@@ -153,3 +153,5 @@ We need the display to reset. It can't tell you the price forever!  However, I t
 ui() looks way better now, and someone reading it would find it a lot easier to follow. Including me. 
 
 First, let's make sure all the products are covered, and then we'll worry about thanking the customer.
+
+One thing I liked about my refactoring efforts on ui() before is that new code feels compelled to match the environment it's getting put into. I could have added the code inline, but it would have felt out of place, kind of like showing up to a costume party without a costume.
