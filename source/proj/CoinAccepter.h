@@ -35,6 +35,7 @@ class CoinAccepter
 		void add(const CoinCandidate & candidate);
 		std::vector<CoinCandidate> returnedCoins() const;
 		void purchaseWith(Cents amount);
+		void makeChange(Cents amount);
 
 	private:
 		int m_currentAmount;
