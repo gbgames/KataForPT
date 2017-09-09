@@ -39,12 +39,14 @@ class SelectionValidator
 		SelectionValidator(CoinAccepter & accepter, ProductSelectionService & service);
 		~SelectionValidator();
 
-		SelectionResponse select(VendingProduct product);
+		void select(VendingProduct product);
+		SelectionResponse currentResponse() const;
 
 	private:
 		CoinAccepter & m_accepter;
 		ProductSelectionService & m_service;
 		std::map<VendingProduct, Cents> m_productToPriceMap;
+		SelectionResponse m_response;
 };
 
 #endif
