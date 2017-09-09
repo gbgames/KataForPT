@@ -150,3 +150,21 @@ TEST_F(SelectionValidatorFixture, WhenSelectingNoProductThenDoNotRespond)
 	validator.select(NO_PRODUCT);
 	EXPECT_THAT(validator.currentResponse(), Eq(NO_RESPONSE));
 }
+
+TEST_F(SelectionValidatorFixture, GivenTooMuchMoneyInsertedWhenPurchaseMadeThenMakeChange)
+{
+	CoinAccepterHelper helper(accepter);
+	helper.insertQuarter();
+	helper.insertQuarter();
+	helper.insertQuarter();
+	helper.insertQuarter();
+	helper.insertQuarter();
+	ASSERT_THAT(accepter.currentAmount(), Eq(125));
+	
+	validator.select(COLA_PRODUCT);
+	ASSERT_THAT(validator.currentResponse(), Eq(PRODUCT_DISPENSED));
+	ASSERT_THAT(selectionService.dispensedItem(), Eq(COLA_PRODUCT));
+
+	EXPECT_THAT(accepter.returnedCoins().size(), Eq(1));
+	EXPECT_THAT(accepter.returnedCoins().at(0), Eq(CoinCandidate(QUARTER_WEIGHT, QUARTER_DIAMETER, QUARTER_THICKNESS)));
+}

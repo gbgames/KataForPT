@@ -243,3 +243,20 @@ THANK YOU
 .
 INSERT COIN
 
+-------------------------------------------------------------------------------
+Next up, Make Change. 
+
+Basically, the code assumes that the customer is putting in the exact amount needed. I now need to allow the customer to insert more money and still be able to purchase an item without the vending machine eating all of the money. 
+
+Currently if I try to purchase a product with too much money in the machine, it tells me the price and doesn't allow the transaction to occur:
+
+qqqqq
+1.25
+a1
+PRICE: 1.00
+.
+1.25
+
+So, let's change it. I want to be able to (1) buy the product even if I have too much money in the machine and (2) return the remaining amount in denominations that make sense.
+
+This test gets me most of the way there, but the CoinAccepter needs a new way to add returned coins, so maybe I should comment out the new validator test and start on the accepter.
