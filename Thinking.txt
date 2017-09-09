@@ -155,3 +155,5 @@ ui() looks way better now, and someone reading it would find it a lot easier to 
 First, let's make sure all the products are covered, and then we'll worry about thanking the customer.
 
 One thing I liked about my refactoring efforts on ui() before is that new code feels compelled to match the environment it's getting put into. I could have added the code inline, but it would have felt out of place, kind of like showing up to a costume party without a costume.
+
+Ok, we have the display updating to tell us the price and thanking us. Now to put it all together into a working app. I think the products can be associated with the kinds of button IDs you would normally see on a vending machine, which makes me think that there should be some kind of explanation to the user of the app. On a separate note, the display's ui() looks way better than the app's run(). 

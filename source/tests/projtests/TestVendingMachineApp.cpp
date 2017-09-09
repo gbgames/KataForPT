@@ -125,3 +125,18 @@ TEST_F(VendingMachineAppFixture, WhenUserEntersRThenAppDisplaysReturnedCoins)
 	std::string noPennyLine(getNextOutputLine());
 	EXPECT_THAT(noPennyLine, StrEq("Returned: rejected coin, rejected coin, rejected coin"));
 }
+
+TEST_F(VendingMachineAppFixture, WhenCustomerSelectsProductThenDisplayPrice)
+{
+	std::stringstream input;
+	input << "a1" << std::endl;
+	input << "b2" << std::endl;
+	input << "c3" << std::endl;
+
+	app.run(input);
+
+	EXPECT_THAT(getNextOutputLine(), StrEq("INSERT COIN"));
+	EXPECT_THAT(getNextOutputLine(), StrEq("PRICE: 1.00"));
+	EXPECT_THAT(getNextOutputLine(), StrEq("PRICE: 0.50"));
+	EXPECT_THAT(getNextOutputLine(), StrEq("PRICE: 0.65"));
+}
