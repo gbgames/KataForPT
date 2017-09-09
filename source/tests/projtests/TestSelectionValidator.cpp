@@ -52,6 +52,7 @@ TEST_F(SelectionValidatorFixture, GivenNoCoinsInsertedWhenColaSelectedThenReject
 	validator.select(COLA_PRODUCT);
 	EXPECT_THAT(validator.currentResponse(), Eq(NOT_ENOUGH_MONEY_RESPONSE));
 	EXPECT_THAT(selectionService.dispensedItem(), Eq(NO_PRODUCT));
+	EXPECT_THAT(validator.moneyRequired(), Eq(100));
 }
 
 TEST_F(SelectionValidatorFixture, GivenEnoughCoinsInsertedWhenColaSelectedThenSelectCola)
