@@ -139,3 +139,7 @@ Ok, so now we have a selector and a validator. Now we need to add some functiona
 I don't like that the validator says you don't have enough money by default. I'd like to have a default state.
 
 Now the display can pay attention to the validator. Actually, no, we need a way for the display to know how much money is needed. It's related to select a product without enough money, so I'll just add an expectation in an existing test. I will also add more tests to cover the other products.
+
+I'm not liking how hardcoded the products and their pricing are. What if we want to remove a product or add another one? But we can worry about it in another kata.
+
+Part of me wants to reset the value of money required, but (1) what's a good default value? 0 doesn't really make sense. And (2), it will be set correctly if the response is NOT_ENOUGH_MONEY_RESPONSE, and otherwise should not be given attention. I suppose a way to ensure it would be to throw an exception if the response type is not correct when calling it. Or we could just say "Don't do that." As it's not meant to be a framework for someone else to write their code with, I want to go with the latter, although in real life I can see an issue with someone else needing to maintain this software if I leave the company or otherwise can't work on the code anymore. So let's be robust about it.

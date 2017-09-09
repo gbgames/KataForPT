@@ -125,3 +125,10 @@ TEST_F(SelectionValidatorFixture, IfNotEnoughMoneyInsertedThenRejectPurchase)
 	EXPECT_THAT(selectionService.dispensedItem(), Eq(NO_PRODUCT));
 	EXPECT_THAT(accepter.currentAmount(), Eq(25));
 }
+
+TEST_F(SelectionValidatorFixture, PreventAskingForMoneyRequiredIfNoProductSelected)
+{
+	ASSERT_THAT(validator.currentResponse(), Eq(NO_RESPONSE));
+
+	EXPECT_THROW(validator.moneyRequired(), std::runtime_error);
+}
