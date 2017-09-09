@@ -132,3 +132,17 @@ TEST_F(SelectionValidatorFixture, PreventAskingForMoneyRequiredIfNoProductSelect
 
 	EXPECT_THROW(validator.moneyRequired(), std::runtime_error);
 }
+
+TEST_F(SelectionValidatorFixture, PreventAskingForMoneyRequiredIfProductPurchased)
+{
+	CoinAccepterHelper helper(accepter);
+	helper.insertQuarter();
+	helper.insertQuarter();
+	ASSERT_THAT(accepter.currentAmount(), Eq(50));
+	validator.select(CHIPS_PRODUCT);
+	ASSERT_THAT(validator.currentResponse(), Eq(PRODUCT_DISPENSED));
+
+	EXPECT_THROW(validator.moneyRequired(), std::runtime_error);
+}
+
+
