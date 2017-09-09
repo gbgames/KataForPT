@@ -307,3 +307,23 @@ A lot of the infrastructure is in place, and so now we'll need to change how we 
 Our test will add a bunch of coins, then expect to get them back instead of getting quarters back. This behavior is different from when change is being made.
 
 Now we need a way to request our money back in the app. When we press the button to return our money, we should see it revert back to having no money and so should say INSERT COIN. Then we can check the return slot and see our money.
+
+And the end result:
+
+$ ./KataForPT-bin 
+INSERT COIN
+qqqdddnn
+0.25
+0.50
+0.75
+0.85
+0.95
+1.05
+1.10
+1.15
+R
+INSERT COIN
+r
+Returned: quarter, quarter, quarter, dime, dime, dime, nickel, nickel
+
+Perfect.

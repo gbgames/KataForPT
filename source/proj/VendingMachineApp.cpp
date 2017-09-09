@@ -71,6 +71,10 @@ void VendingMachineApp::process(char choice)
 		case 'r':
 			m_showReturnedCoins = true;
 			break;
+		
+		case 'R':
+			m_accepter.returnMoney();
+			break;
 
 		case 'a':
 		case 'b':
